@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Crmf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,13 +48,30 @@ namespace COMPLETE_FLAT_UI
             }
         }
 
-        private void BtnIniciar_Click(object sender, EventArgs e)
-        {
+				private void BtnIniciar_Click(object sender, EventArgs e)
+				{
 
 						//logica para contraseña
-
-
-            this.Hide();
+						if (string.IsNullOrWhiteSpace(TxtUsuario.Text.Trim()) || string.IsNullOrWhiteSpace(TxtContraseña.Text.Trim()))
+						{
+								MessageBox.Show("Hay  campos  vacios", "ALerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+								TxtUsuario.Focus();
+								return;
+						}
+						var user = Func_Login.InicialSesion(TxtUsuario.Text.Trim());
+						if (user == null)
+						{
+								MessageBox.Show("Usuario no encontrado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								TxtUsuario.Focus();
+								return;
+						}
+						if (!Func_Login.ComprovarPassword(TxtContraseña.Text))
+						{
+								MessageBox.Show("Error de contraseña incorrecta", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								TxtContraseña.Focus();
+								return;
+						}
+						this.Hide();
             FrmMenuPrincipal f = new FrmMenuPrincipal();
             f.ShowDialog();
         }

@@ -6,26 +6,27 @@ using System.Data.SqlClient;
 
 namespace COMPLETE_FLAT_UI
 {
-		internal class ClassUsuario
+		internal class Func_Login
 		{
 				private static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tienda_don_pedro;Uid=root;Pwd=;";
 
+				/*
+				 Variable global para comunicar los forms y saber el roll
+				 */
 				public static Usuario Sesion;
 
-				public static List<Usuario> Fuc_TraerUsuarios(string alias)
+				public static Usuario InicialSesion(string alias)
 				{
-						var usuarios = new List<Usuario>();
 						try
 						{
 								using (var conexion = new MySqlConnection(cadenaConexion))
 								{
 										conexion.Open();
-										var consulta = alias == null
-											? "SELECT * FROM tbl_usuario"
-											: "SELECT * FROM tbl_usuario WHERE alias_usuario = @alias";
+										var consulta = "SELECT * FROM tbl_usuario WHERE alias_usuario = @alias";
 
 										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
+												
 												if (alias != null)
 												{
 														cmd.Parameters.AddWithValue("@alias", alias);
@@ -34,14 +35,14 @@ namespace COMPLETE_FLAT_UI
 												{
 														while (lector.Read())
 														{
-																var usuario = new Usuario(
-																		Convert.ToInt64(lector["id_usuario"]),
-																		lector["alias_usuario"].ToString(),
-																		lector["nombre_usuario"].ToString(),
-																		lector["apellido_usuario"].ToString(),
-																		lector["password_usuario"].ToString(),
-																		lector["rol_usuario"].ToString());
-																usuarios.Add(usuario);
+																Sesion = new Usuario(
+																		 Convert.ToInt64(lector["id_usuario"]),
+																		 lector["alias_usuario"].ToString(),
+																		 lector["nombre_usuario"].ToString(),
+																		 lector["apellido_usuario"].ToString(),
+																		 lector["password_usuario"].ToString(),
+																		 lector["rol_usuario"].ToString());
+																return Sesion;
 														}
 												}
 										}
@@ -51,8 +52,7 @@ namespace COMPLETE_FLAT_UI
 						{
 								Console.WriteLine("Error al traer usuarios: " + ex.Message);
 						}
-						Sesion = usuarios.Count > 0 ? usuarios[0] : null;
-						return usuarios;
+						return null;
 				}
 
 				public static bool ComprovarPassword(string password)
