@@ -51,7 +51,7 @@ namespace COMPLETE_FLAT_UI
 				private void BtnIniciar_Click(object sender, EventArgs e)
 				{
 
-						
+						//Comprobar contraseña : 
 						if (string.IsNullOrWhiteSpace(TxtUsuario.Text.Trim()) || string.IsNullOrWhiteSpace(TxtContraseña.Text.Trim()))
 						{
 								MessageBox.Show("Hay  campos  vacios", "ALerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -71,6 +71,7 @@ namespace COMPLETE_FLAT_UI
 								TxtContraseña.Focus();
 								return;
 						}
+
 						this.Hide();
             FrmMenuPrincipal f = new FrmMenuPrincipal();
             f.ShowDialog();

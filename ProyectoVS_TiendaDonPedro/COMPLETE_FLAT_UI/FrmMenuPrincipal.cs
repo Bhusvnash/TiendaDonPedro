@@ -213,7 +213,7 @@ namespace COMPLETE_FLAT_UI
             fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
             fm.LblTitulo.Text = "Lista de Usuarios";
 						fm.DGVDatos.DataSource = Func_Usuarios.GetUsuarios();
-  //ocultamos id,
+										
 						AbrirFormEnPanel(fm);
         }
 
