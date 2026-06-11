@@ -1,288 +1,284 @@
 ﻿using COMPLETE_FLAT_UI.BackEnd;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace COMPLETE_FLAT_UI
 {
-    public partial class FrmMenuPrincipal : Form
-    {
-				
-        //Constructor
-        public FrmMenuPrincipal()
-        {
-            InitializeComponent();
-            //Estas lineas eliminan los parpadeos del formulario o controles en la interfaz grafica (Pero no en un 100%)
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
-            this.DoubleBuffered = true;
-        }
-        //METODO PARA REDIMENCIONAR/CAMBIAR TAMAÑO A FORMULARIO  TIEMPO DE EJECUCION ----------------------------------------------------------
-        private int tolerance = 15;
-        private const int WM_NCHITTEST = 132;
-        private const int HTBOTTOMRIGHT = 17;
-        private Rectangle sizeGripRectangle;
+		public partial class FrmMenuPrincipal : Form
+		{
+				//Constructor
+				public FrmMenuPrincipal()
+				{
+						InitializeComponent();
+						//Estas lineas eliminan los parpadeos del formulario o controles en la interfaz grafica (Pero no en un 100%)
+						this.SetStyle(ControlStyles.ResizeRedraw, true);
+						this.DoubleBuffered = true;
+				}
+
+				//METODO PARA REDIMENCIONAR/CAMBIAR TAMAÑO A FORMULARIO  TIEMPO DE EJECUCION ----------------------------------------------------------
+				private int tolerance = 15;
+
+				private const int WM_NCHITTEST = 132;
+				private const int HTBOTTOMRIGHT = 17;
+				private Rectangle sizeGripRectangle;
 				private Usuario sesion = Func_Login.Sesion;
+
 				protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case WM_NCHITTEST:
-                    base.WndProc(ref m);
-                    var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
-                    if (sizeGripRectangle.Contains(hitPoint))
-                        m.Result = new IntPtr(HTBOTTOMRIGHT);
-                    break;
-                default:
-                    base.WndProc(ref m);
-                    break;
-            }
-        }
-        //----------------DIBUJAR RECTANGULO / EXCLUIR ESQUINA PANEL 
-        protected override void OnSizeChanged(EventArgs e)
-        {
-            base.OnSizeChanged(e);
-            var region = new Region(new Rectangle(0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height));
+				{
+						switch (m.Msg)
+						{
+								case WM_NCHITTEST:
+										base.WndProc(ref m);
+										var hitPoint = this.PointToClient(new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16));
+										if (sizeGripRectangle.Contains(hitPoint))
+												m.Result = new IntPtr(HTBOTTOMRIGHT);
+										break;
 
-            sizeGripRectangle = new Rectangle(this.ClientRectangle.Width - tolerance, this.ClientRectangle.Height - tolerance, tolerance, tolerance);
+								default:
+										base.WndProc(ref m);
+										break;
+						}
+				}
 
-            region.Exclude(sizeGripRectangle);
-            this.panelContenedorPrincipal.Region = region;
-            this.Invalidate();
-        }
-        //----------------COLOR Y GRIP DE RECTANGULO INFERIOR
-        protected override void OnPaint(PaintEventArgs e)
-        {
+				//----------------DIBUJAR RECTANGULO / EXCLUIR ESQUINA PANEL
+				protected override void OnSizeChanged(EventArgs e)
+				{
+						base.OnSizeChanged(e);
+						var region = new Region(new Rectangle(0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height));
 
-            SolidBrush blueBrush = new SolidBrush(Color.FromArgb(55, 61, 69));
-            e.Graphics.FillRectangle(blueBrush, sizeGripRectangle);
+						sizeGripRectangle = new Rectangle(this.ClientRectangle.Width - tolerance, this.ClientRectangle.Height - tolerance, tolerance, tolerance);
 
-            base.OnPaint(e);
-            ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
-        }
-       
-        //METODO PARA ARRASTRAR EL FORMULARIO---------------------------------------------------------------------
-        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
-        private extern static void ReleaseCapture();
+						region.Exclude(sizeGripRectangle);
+						this.panelContenedorPrincipal.Region = region;
+						this.Invalidate();
+				}
 
-        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
-        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+				//----------------COLOR Y GRIP DE RECTANGULO INFERIOR
+				protected override void OnPaint(PaintEventArgs e)
+				{
+						SolidBrush blueBrush = new SolidBrush(Color.FromArgb(55, 61, 69));
+						e.Graphics.FillRectangle(blueBrush, sizeGripRectangle);
 
-        private void PanelBarraTitulo_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(this.Handle, 0x112, 0xf012, 0);
-        }
-        //METODOS PARA CERRAR,MAXIMIZAR, MINIMIZAR FORMULARIO------------------------------------------------------
-        int lx, ly;
-        int sw, sh;
-        private void btnMaximizar_Click(object sender, EventArgs e)
-        {
-            lx = this.Location.X;
-            ly = this.Location.Y;
-            sw = this.Size.Width;
-            sh = this.Size.Height;
-            int largopant = Screen.PrimaryScreen.Bounds.Height;
-            this.Size = Screen.PrimaryScreen.WorkingArea.Size;
-            this.Location = Screen.PrimaryScreen.WorkingArea.Location;
-            if (largopant <= 600)
-            {
-                BtnSalir.Location = new Point(3, 440);
-            }
-            if (largopant > 600)
-            {
-                BtnSalir.Location = new Point(3, largopant - 150);
+						base.OnPaint(e);
+						ControlPaint.DrawSizeGrip(e.Graphics, Color.Transparent, sizeGripRectangle);
+				}
 
-            }
-            btnMaximizar.Visible = false;
-            btnNormal.Visible = true;
+				//METODO PARA ARRASTRAR EL FORMULARIO---------------------------------------------------------------------
+				[DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+				private static extern void ReleaseCapture();
 
-        }
+				[DllImport("user32.DLL", EntryPoint = "SendMessage")]
+				private static extern void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void btnNormal_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(1100, 550);
-            this.Location = new Point(lx, ly);
-            int largopant = Screen.PrimaryScreen.Bounds.Height;
-            BtnSalir.Location = new Point(3, 440);
-            btnNormal.Visible = false;
-            btnMaximizar.Visible = true;
-        }
+				private void PanelBarraTitulo_MouseDown(object sender, MouseEventArgs e)
+				{
+						ReleaseCapture();
+						SendMessage(this.Handle, 0x112, 0xf012, 0);
+				}
 
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
+				//METODOS PARA CERRAR,MAXIMIZAR, MINIMIZAR FORMULARIO------------------------------------------------------
+				private int lx, ly;
 
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Está seguro de cerrar?", "Alerta¡¡", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
+				private int sw, sh;
 
+				private void btnMaximizar_Click(object sender, EventArgs e)
+				{
+						lx = this.Location.X;
+						ly = this.Location.Y;
+						sw = this.Size.Width;
+						sh = this.Size.Height;
+						int largopant = Screen.PrimaryScreen.Bounds.Height;
+						this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+						this.Location = Screen.PrimaryScreen.WorkingArea.Location;
+						if (largopant <= 600)
+						{
+								BtnSalir.Location = new Point(3, 440);
+						}
+						if (largopant > 600)
+						{
+								BtnSalir.Location = new Point(3, largopant - 150);
+						}
+						btnMaximizar.Visible = false;
+						btnNormal.Visible = true;
+				}
 
-        //METODOS PARA ANIMACION DE MENU SLIDING--
-        private void btnMenu_Click(object sender, EventArgs e)
-        {
-            //-------CON EFECTO SLIDING
-            if (panelMenu.Width == 200)
-            {
-                this.tmContraerMenu.Start();
-            }
-            else if (panelMenu.Width == 55)
-            {
-                this.tmExpandirMenu.Start();
-            }
+				private void btnNormal_Click(object sender, EventArgs e)
+				{
+						this.Size = new Size(1100, 550);
+						this.Location = new Point(lx, ly);
+						int largopant = Screen.PrimaryScreen.Bounds.Height;
+						BtnSalir.Location = new Point(3, 440);
+						btnNormal.Visible = false;
+						btnMaximizar.Visible = true;
+				}
 
-            ////-------SIN EFECTO
-            //if (panelMenu.Width == 55)
-            //{
-            //    panelMenu.Width = 200;
-            //}
-            //else
+				private void btnMinimizar_Click(object sender, EventArgs e)
+				{
+						this.WindowState = FormWindowState.Minimized;
+				}
 
-            //    panelMenu.Width = 55;
-        }
+				private void btnCerrar_Click(object sender, EventArgs e)
+				{
+						if (MessageBox.Show("¿Está seguro de cerrar?", "Alerta¡¡", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+						{
+								Application.Exit();
+						}
+				}
 
-        private void tmExpandirMenu_Tick(object sender, EventArgs e)
-        {
-            if (panelMenu.Width >= 200)
-                this.tmExpandirMenu.Stop();
-            else
-                panelMenu.Width = panelMenu.Width + 5;
-            
-        }
+				//METODOS PARA ANIMACION DE MENU SLIDING--
+				private void btnMenu_Click(object sender, EventArgs e)
+				{
+						//-------CON EFECTO SLIDING
+						if (panelMenu.Width == 200)
+						{
+								this.tmContraerMenu.Start();
+						}
+						else if (panelMenu.Width == 55)
+						{
+								this.tmExpandirMenu.Start();
+						}
 
-        private void tmContraerMenu_Tick(object sender, EventArgs e)
-        {
-            if (panelMenu.Width <= 55)
-                this.tmContraerMenu.Stop();
-            else
-                panelMenu.Width = panelMenu.Width - 5;
-        }
+						////-------SIN EFECTO
+						//if (panelMenu.Width == 55)
+						//{
+						//    panelMenu.Width = 200;
+						//}
+						//else
 
-        //METODO PARA ABRIR FORM DENTRO DE PANEL-----------------------------------------------------
-        private void AbrirFormEnPanel(object formHijo)
-        {
-            if (this.panelContenedorForm.Controls.Count > 0)
-                this.panelContenedorForm.Controls.RemoveAt(0);
-            Form fh = formHijo as Form;
-            fh.TopLevel = false;
-            fh.FormBorderStyle = FormBorderStyle.None;
-            fh.Dock = DockStyle.Fill;            
-            this.panelContenedorForm.Controls.Add(fh);
-            this.panelContenedorForm.Tag = fh;
-            fh.Show();
-        }
-        //METODO PARA MOSTRAR FORMULARIO DE LOGO Al INICIAR ----------------------------------------------------------
-        private void MostrarFormLogo()
-        {
-            AbrirFormEnPanel(new FrmLogo());
-        }
+						//    panelMenu.Width = 55;
+				}
 
-        private void FormMenuPrincipal_Load(object sender, EventArgs e)
-        {
-            MostrarFormLogo();
+				private void tmExpandirMenu_Tick(object sender, EventArgs e)
+				{
+						if (panelMenu.Width >= 200)
+								this.tmExpandirMenu.Stop();
+						else
+								panelMenu.Width = panelMenu.Width + 5;
+				}
+
+				private void tmContraerMenu_Tick(object sender, EventArgs e)
+				{
+						if (panelMenu.Width <= 55)
+								this.tmContraerMenu.Stop();
+						else
+								panelMenu.Width = panelMenu.Width - 5;
+				}
+
+				//METODO PARA ABRIR FORM DENTRO DE PANEL-----------------------------------------------------
+				private void AbrirFormEnPanel(object formHijo)
+				{
+						if (this.panelContenedorForm.Controls.Count > 0)
+								this.panelContenedorForm.Controls.RemoveAt(0);
+						Form fh = formHijo as Form;
+						fh.TopLevel = false;
+						fh.FormBorderStyle = FormBorderStyle.None;
+						fh.Dock = DockStyle.Fill;
+						this.panelContenedorForm.Controls.Add(fh);
+						this.panelContenedorForm.Tag = fh;
+						fh.Show();
+				}
+
+				//METODO PARA MOSTRAR FORMULARIO DE LOGO Al INICIAR ----------------------------------------------------------
+				private void MostrarFormLogo()
+				{
+						AbrirFormEnPanel(new FrmLogo());
+				}
+
+				private void FormMenuPrincipal_Load(object sender, EventArgs e)
+				{
+						MostrarFormLogo();
 						Lbl_Usuario_Apellido.Text = sesion.apellido_usuario;
 						Lbl_Usuario_Nombre.Text = sesion.nombre_usuario;
-        }
-        //METODO PARA MOSTRAR FORMULARIO DE LOGO Al CERRAR OTROS FORM ----------------------------------------------------------
-        private void MostrarFormLogoAlCerrarForms(object sender, FormClosedEventArgs e)
-        {
-            MostrarFormLogo();
-        }
+				}
 
-       
+				//METODO PARA MOSTRAR FORMULARIO DE LOGO Al CERRAR OTROS FORM ----------------------------------------------------------
+				private void MostrarFormLogoAlCerrarForms(object sender, FormClosedEventArgs e)
+				{
+						MostrarFormLogo();
+				}
 
-        
-
-        
-
-        private void BtnUsuarios_Click(object sender, EventArgs e)
-        {
-            FrmLista fm = new FrmLista();
-            fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
-            fm.LblTitulo.Text = "Lista de Usuarios";
+				private void BtnUsuarios_Click(object sender, EventArgs e)
+				{
+						FrmLista fm = new FrmLista();
+						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						fm.LblTitulo.Text = "Lista de Usuarios";
 						fm.DGVDatos.DataSource = Func_Usuarios.GetUsuarios();
-										
+						fm.DGVDatos.ReadOnly = true;
+						// Ocultar columnas
+						fm.DGVDatos.Columns["id_usuario"].Visible = false;
+						fm.DGVDatos.Columns["password_usuario"].Visible = false;
+						// Cambiar títulos
+						fm.DGVDatos.Columns["alias_usuario"].HeaderText = "Alias";
+						fm.DGVDatos.Columns["nombre_usuario"].HeaderText = "Nombre";
+						fm.DGVDatos.Columns["apellido_usuario"].HeaderText = "Apellido";
+						fm.DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
+						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 						AbrirFormEnPanel(fm);
-        }
+				}
 
-        private void BtnProductos_Click(object sender, EventArgs e)
-        {
-            FrmLista fm = new FrmLista();
-            fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
-            fm.LblTitulo.Text = "Lista de Productos";
-            AbrirFormEnPanel(fm);
-        }
+				private void BtnProductos_Click(object sender, EventArgs e)
+				{
+						FrmLista fm = new FrmLista();
+						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						fm.LblTitulo.Text = "Lista de Productos";
+						AbrirFormEnPanel(fm);
+				}
 
-       
+				private void FormMenuPrincipal_Resize(object sender, EventArgs e)
+				{
+						int largoform = this.Height;
+						BtnSalir.Location = new Point(3, largoform - 110);
+				}
 
-        private void FormMenuPrincipal_Resize(object sender, EventArgs e)
-        {
-            int largoform = this.Height;
-            BtnSalir.Location = new Point(3, largoform-110);
-        }
+				private void BtnCategorias_Click(object sender, EventArgs e)
+				{
+						FrmLista fm = new FrmLista();
+						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						fm.LblTitulo.Text = "Lista de Categorias";
+						AbrirFormEnPanel(fm);
+				}
 
-        private void BtnCategorias_Click(object sender, EventArgs e)
-        {
-            FrmLista fm = new FrmLista();
-            fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
-            fm.LblTitulo.Text = "Lista de Categorias";
-            AbrirFormEnPanel(fm);
-        }
+				private void BtnReportes_Click(object sender, EventArgs e)
+				{
+						//ventas del mes
+						//ventas por cajera
+						//ventas por fecha
+						//Grafica de Ventas
+						MessageBox.Show("Se deben hacer estas consultas");
+				}
 
-        private void BtnReportes_Click(object sender, EventArgs e)
-        {
-            //ventas del mes
-            //ventas por cajera
-            //ventas por fecha
-            //Grafica de Ventas
-            MessageBox.Show("Se deben hacer estas consultas");
-        }
+				private void BtnSalir_Click(object sender, EventArgs e)
+				{
+						if (MessageBox.Show("¿Está seguro de cerrar?", "Alerta¡¡", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+						{
+								Application.Exit();
+						}
+				}
 
-        private void BtnSalir_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Está seguro de cerrar?", "Alerta¡¡", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
+				private void BtnFacturas_Click(object sender, EventArgs e)
+				{
+						FrmFacturaEnc fm = new FrmFacturaEnc();
+						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						AbrirFormEnPanel(fm);
+				}
 
-        private void BtnFacturas_Click(object sender, EventArgs e)
-        {
-            FrmFacturaEnc fm = new FrmFacturaEnc();
-            fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
-            AbrirFormEnPanel(fm);
-        }
+				//METODOS PARA ABRIR OTROS FORMULARIOS Y MOSTRAR FORM DE LOGO Al CERRAR ----------------------------------------------------------
+				private void btnListaClientes_Click(object sender, EventArgs e)
+				{
+						FrmLista fm = new FrmLista();
+						
+						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						fm.LblTitulo.Text = "Lista de Clientes";
+						AbrirFormEnPanel(fm);
+				}
 
-
-
-        //METODOS PARA ABRIR OTROS FORMULARIOS Y MOSTRAR FORM DE LOGO Al CERRAR ----------------------------------------------------------
-        private void btnListaClientes_Click(object sender, EventArgs e)
-        {
-            FrmLista fm = new FrmLista();
-            fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
-            fm.LblTitulo.Text = "Lista de Clientes";
-            AbrirFormEnPanel(fm);
-        }
-
-
-        //METODO PARA HORA Y FECHA ACTUAL ----------------------------------------------------------
-        private void tmFechaHora_Tick(object sender, EventArgs e)
-        {
-            lbFecha.Text = DateTime.Now.ToLongDateString();
-            lblHora.Text = DateTime.Now.ToString("HH:mm:ssss");
-        } 
-
-    }
+				//METODO PARA HORA Y FECHA ACTUAL ----------------------------------------------------------
+				private void tmFechaHora_Tick(object sender, EventArgs e)
+				{
+						lbFecha.Text = DateTime.Now.ToLongDateString();
+						lblHora.Text = DateTime.Now.ToString("HH:mm:ssss");
+				}
+		}
 }
