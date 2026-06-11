@@ -17,8 +17,8 @@ namespace COMPLETE_FLAT_UI
         public FrmLista()
         {
             InitializeComponent();
+						
         }
-
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();

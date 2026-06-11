@@ -1,4 +1,5 @@
-﻿using System;
+﻿using COMPLETE_FLAT_UI.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace COMPLETE_FLAT_UI
 {
     public partial class FrmMenuPrincipal : Form
     {
+				
         //Constructor
         public FrmMenuPrincipal()
         {
@@ -27,8 +29,8 @@ namespace COMPLETE_FLAT_UI
         private const int WM_NCHITTEST = 132;
         private const int HTBOTTOMRIGHT = 17;
         private Rectangle sizeGripRectangle;
-
-        protected override void WndProc(ref Message m)
+				private Usuario sesion = Func_Login.Sesion;
+				protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
             {
@@ -190,6 +192,8 @@ namespace COMPLETE_FLAT_UI
         private void FormMenuPrincipal_Load(object sender, EventArgs e)
         {
             MostrarFormLogo();
+						Lbl_Usuario_Apellido.Text = sesion.apellido_usuario;
+						Lbl_Usuario_Nombre.Text = sesion.nombre_usuario;
         }
         //METODO PARA MOSTRAR FORMULARIO DE LOGO Al CERRAR OTROS FORM ----------------------------------------------------------
         private void MostrarFormLogoAlCerrarForms(object sender, FormClosedEventArgs e)
@@ -208,7 +212,9 @@ namespace COMPLETE_FLAT_UI
             FrmLista fm = new FrmLista();
             fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
             fm.LblTitulo.Text = "Lista de Usuarios";
-            AbrirFormEnPanel(fm);
+						fm.DGVDatos.DataSource = Func_Usuarios.GetUsuarios();
+  //ocultamos id,
+						AbrirFormEnPanel(fm);
         }
 
         private void BtnProductos_Click(object sender, EventArgs e)

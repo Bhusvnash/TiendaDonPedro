@@ -8,8 +8,7 @@ namespace COMPLETE_FLAT_UI
 {
 		internal class Func_Login
 		{
-				private static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tienda_don_pedro;Uid=root;Pwd=;";
-
+				public static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tienda_don_pedro;Uid=root;Pwd=;";
 				/*
 				 Variable global para comunicar los forms y saber el roll
 				 */

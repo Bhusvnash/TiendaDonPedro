@@ -224,7 +224,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView DGVDatos;
+        public System.Windows.Forms.DataGridView DGVDatos;
         private System.Windows.Forms.Button BtnCerrar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button BtnEliminar;
