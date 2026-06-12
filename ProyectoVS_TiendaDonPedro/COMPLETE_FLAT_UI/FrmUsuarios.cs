@@ -1,4 +1,5 @@
-﻿using System;
+﻿using COMPLETE_FLAT_UI.BackEnd;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace COMPLETE_FLAT_UI
 				public FrmUsuarios()
 				{
 						InitializeComponent();
+						
 				}
 
 				private void BtnSalir_Click(object sender, EventArgs e)
@@ -29,28 +31,18 @@ namespace COMPLETE_FLAT_UI
 
 				private void BtnGuardar_Click(object sender, EventArgs e)
 				{
-						TxtNombres.Text = "";
-						if (string.IsNullOrWhiteSpace(TxtIDUsuario.Text))
-						{
-								MessageBox.Show("Falta el campo ID Usuario", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-								TxtIDUsuario.Focus();
-								return;
-						}
-
 						if (string.IsNullOrWhiteSpace(TxtUsuario.Text))
 						{
 								MessageBox.Show("Falta el campo Usuario (Alias)", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 								TxtUsuario.Focus();
 								return;
 						}
-
 						if (string.IsNullOrWhiteSpace(TxtNombres.Text))
 						{
 								MessageBox.Show("Falta el campo Nombres", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 								TxtNombres.Focus();
 								return;
 						}
-
 						if (string.IsNullOrWhiteSpace(TxtApellidos.Text))
 						{
 								MessageBox.Show("Falta el campo Apellidos", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -64,17 +56,37 @@ namespace COMPLETE_FLAT_UI
 								TxtContraseña.Focus();
 								return;
 						}
-
 						if (CbxRol.SelectedIndex < 0)
 						{
 								MessageBox.Show("Falta seleccionar el Rol", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 								CbxRol.Focus();
 								return;
 						}
+						//msg-> continua ?
+						DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?"
+						,"Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-						// Si llegamos aquí, todos los campos están completos
-						MessageBox.Show("Datos validados correctamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-						// Aquí va tu lógica para guardar en base de datos
+						if (result == DialogResult.Yes)
+						{
+								if (FuncUsuarios.NewUsuario(new Usuario(-1, TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text)))
+								{
+										MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										TxtUsuario.Clear();
+										TxtNombres.Clear();
+										TxtApellidos.Clear();
+										TxtContraseña.Clear();
+										CbxRol.SelectedIndex = -1;
+								}
+								else
+								{
+										MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+										TxtUsuario.Focus();
+								}
+						}
+						else if (result == DialogResult.No)
+						{
+										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						}
 				}
 		}
 }

@@ -204,17 +204,7 @@ namespace COMPLETE_FLAT_UI
 						FrmLista fm = new FrmLista();
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Usuarios";
-						fm.DGVDatos.DataSource = Func_Usuarios.GetUsuarios();
-						fm.DGVDatos.ReadOnly = true;
-						// Ocultar columnas
-						fm.DGVDatos.Columns["id_usuario"].Visible = false;
-						fm.DGVDatos.Columns["password_usuario"].Visible = false;
-						// Cambiar títulos
-						fm.DGVDatos.Columns["alias_usuario"].HeaderText = "Alias";
-						fm.DGVDatos.Columns["nombre_usuario"].HeaderText = "Nombre";
-						fm.DGVDatos.Columns["apellido_usuario"].HeaderText = "Apellido";
-						fm.DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
-						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+						fm.verUsuarios();
 						AbrirFormEnPanel(fm);
 				}
 
@@ -268,7 +258,6 @@ namespace COMPLETE_FLAT_UI
 				private void btnListaClientes_Click(object sender, EventArgs e)
 				{
 						FrmLista fm = new FrmLista();
-						
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Clientes";
 						fm.DGVDatos.DataSource = Func_Clientes.GetClientes();
