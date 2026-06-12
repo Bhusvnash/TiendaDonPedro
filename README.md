@@ -1,7 +1,7 @@
 <div align="center">
 
-<!-- Espacio para el Logo/Banner del proyecto -->
-<img src="https://via.placeholder.com/900x250.png?text=TiendaDonPedro+%7C+Sistema+de+Gesti%C3%B3n" alt="TiendaDonPedro Banner" width="100%">
+
+<img src="https://i.pinimg.com/736x/14/36/fb/1436fb169ec6d7919c42ed17f799b63a.jpg" alt="TiendaDonPedro Banner" width="100%">
 
 # TiendaDonPedro
 
