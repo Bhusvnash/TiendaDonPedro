@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COMPLETE_FLAT_UI.BackEnd.modulos
+namespace COMPLETE_FLAT_UI
 {
 		internal class Cliente
 		{

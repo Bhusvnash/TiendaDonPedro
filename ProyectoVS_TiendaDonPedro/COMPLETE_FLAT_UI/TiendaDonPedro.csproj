@@ -124,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackEnd\FuncionesClientes.cs" />
     <Compile Include="BackEnd\FuncionesUsuarios.cs" />
     <Compile Include="BackEnd\modelos\ObjetoCliente.cs" />
     <Compile Include="FrmCategorias.cs">

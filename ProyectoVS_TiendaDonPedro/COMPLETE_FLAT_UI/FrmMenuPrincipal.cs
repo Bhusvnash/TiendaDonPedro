@@ -271,7 +271,16 @@ namespace COMPLETE_FLAT_UI
 						
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Clientes";
-						AbrirFormEnPanel(fm);
+						fm.DGVDatos.DataSource = Func_Clientes.GetClientes();
+						fm.DGVDatos.ReadOnly = true;
+						// Ocultar columnas
+						fm.DGVDatos.Columns["id_cliente"].Visible = false;
+						// Cambiar títulos
+						fm.DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";
+						fm.DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
+						fm.DGVDatos.Columns["email_cliente"].HeaderText = "Email";
+						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+						fm.Show();
 				}
 
 				//METODO PARA HORA Y FECHA ACTUAL ----------------------------------------------------------
