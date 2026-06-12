@@ -258,7 +258,7 @@ namespace COMPLETE_FLAT_UI
 				private void btnListaClientes_Click(object sender, EventArgs e)
 				{
 						FrmLista fm = new FrmLista();
-						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+					//	fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Clientes";
 						fm.DGVDatos.DataSource = Func_Clientes.GetClientes();
 						fm.DGVDatos.ReadOnly = true;
@@ -269,7 +269,8 @@ namespace COMPLETE_FLAT_UI
 						fm.DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
 						fm.DGVDatos.Columns["email_cliente"].HeaderText = "Email";
 						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-						fm.Show();
+						AbrirFormEnPanel(fm);
+						
 				}
 
 				//METODO PARA HORA Y FECHA ACTUAL ----------------------------------------------------------
