@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Google.Protobuf.WellKnownTypes;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data;
-using MySql.Data.MySqlClient;
 using ZstdSharp.Unsafe;
+using static Mysqlx.Expect.Open.Types.Condition.Types;
 
 namespace COMPLETE_FLAT_UI.BackEnd
 {
@@ -41,7 +43,6 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								return null;
 						}
 				}
-
 				public static bool NewUsuario(Usuario user)
 				{
 						using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
@@ -65,8 +66,8 @@ namespace COMPLETE_FLAT_UI.BackEnd
 												cmd.Parameters.AddWithValue("@ApellidoUsuario", user.apellido_usuario);
 												cmd.Parameters.AddWithValue("@PasswordUsuario", user.password_usuario);
 												cmd.Parameters.AddWithValue("@RolUsuario", user.rol_usuario);
-												int r =  cmd.ExecuteNonQuery();
-												return r > 0;
+												int response =  cmd.ExecuteNonQuery();
+												return response > 0;
 										}
 								}
 								catch 
@@ -75,6 +76,41 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								}
 						}
 
+				}
+
+				public static bool UpdateUsuario(Usuario user)
+				{
+					
+						try
+						{
+								using(var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = @"UPDATE tbl_usuario
+                                SET alias_usuario = @alias,
+                                    nombre_usuario = @nombre,
+                                    apellido_usuario = @apellido,
+                                    password_usuario = @pass,
+                                    rol_usuario = @rol
+                                WHERE id_usuario = @id";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@id", user.id_usuario);
+												cmd.Parameters.AddWithValue("@alias", user.alias_usuario);
+												cmd.Parameters.AddWithValue("@nombre", user.nombre_usuario);
+												cmd.Parameters.AddWithValue("@apellido", user.apellido_usuario);
+												cmd.Parameters.AddWithValue("@pass", user.password_usuario);
+												cmd.Parameters.AddWithValue("@rol", user.rol_usuario);
+
+												int rpt = cmd.ExecuteNonQuery();
+												return rpt > 0;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
 				}
 		}
 }

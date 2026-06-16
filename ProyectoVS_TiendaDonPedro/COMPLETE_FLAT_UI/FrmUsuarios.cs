@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -62,40 +63,50 @@ namespace COMPLETE_FLAT_UI
 								CbxRol.Focus();
 								return;
 						}
-						//si esta editando editando
-						if (editando)
+						//si no esta editando editando
+						if (!editando)
 						{
-								//reiniciamos estado
-								editando = false;
-						}
-						else
-						{
-								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?"
-						, "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-								if (result == DialogResult.Yes)
-								{
-										if (FuncUsuarios.NewUsuario(new Usuario(-1, TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text)))
-										{
-												MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-												TxtUsuario.Clear();
-												TxtNombres.Clear();
-												TxtApellidos.Clear();
-												TxtContraseña.Clear();
-												CbxRol.SelectedIndex = -1;
-										}
-										else
-										{
-												MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-												TxtUsuario.Focus();
-										}
-								}
-								else if (result == DialogResult.No)
+								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+								if (result != DialogResult.Yes)
 								{
 										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
 								}
+								Usuario user = new Usuario(-1, TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text);
+
+								if (FuncUsuarios.NewUsuario(user))
+								{
+										MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										//limpiamos los campos
+										TxtUsuario.Clear(); TxtNombres.Clear(); TxtApellidos.Clear(); TxtContraseña.Clear(); CbxRol.SelectedIndex = -1;
+								}
+								else
+								{
+										MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+										TxtUsuario.Focus();
+								}
 						}
-						
+						//esta editando
+						if (editando)
+						{
+								//preguntamos si quiera continuar con los datos que tiene
+								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+								if (result != DialogResult.Yes)
+								{
+										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										return;
+								}
+								Usuario user = new Usuario(Convert.ToInt64(TxtIDUsuario.Text), TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text);
+								if (FuncUsuarios.UpdateUsuario(user))
+								{
+										MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										TxtUsuario.Clear(); TxtNombres.Clear(); TxtApellidos.Clear(); TxtContraseña.Clear(); CbxRol.SelectedIndex = -1;
+								}
+								else
+								{
+										MessageBox.Show("Error: No se pudo actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+										TxtUsuario.Focus();
+								}
+						}
 				}
 		}
 }

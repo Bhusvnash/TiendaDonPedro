@@ -53,7 +53,6 @@ namespace COMPLETE_FLAT_UI
 						}
 						return null;
 				}
-
 				public static bool ComprovarPassword(string password)
 				{
 						if (Sesion != null)

@@ -64,6 +64,7 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
+								verUsuarios();
 						}
 				}
 
@@ -85,7 +86,7 @@ namespace COMPLETE_FLAT_UI
 
 				public void verUsuarios()
 				{
-						// DGVDatos.Rows.Clear();
+					// DGVDatos.Rows.Clear();
 						DGVDatos.Columns.Clear();
 						DGVDatos.DataSource = FuncUsuarios.GetUsuarios();
 						DGVDatos.ReadOnly = true;
