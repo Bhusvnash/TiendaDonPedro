@@ -16,8 +16,9 @@ namespace COMPLETE_FLAT_UI
 				public FrmUsuarios()
 				{
 						InitializeComponent();
-						
 				}
+
+				public bool editando = false;
 
 				private void BtnSalir_Click(object sender, EventArgs e)
 				{
@@ -49,7 +50,6 @@ namespace COMPLETE_FLAT_UI
 								TxtApellidos.Focus();
 								return;
 						}
-
 						if (string.IsNullOrWhiteSpace(TxtContraseña.Text))
 						{
 								MessageBox.Show("Falta el campo Contraseña", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -62,31 +62,40 @@ namespace COMPLETE_FLAT_UI
 								CbxRol.Focus();
 								return;
 						}
-						//msg-> continua ?
-						DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?"
-						,"Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+						//si esta editando editando
+						if (editando)
+						{
+								//reiniciamos estado
+								editando = false;
+						}
+						else
+						{
+								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?"
+						, "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-						if (result == DialogResult.Yes)
-						{
-								if (FuncUsuarios.NewUsuario(new Usuario(-1, TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text)))
+								if (result == DialogResult.Yes)
 								{
-										MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-										TxtUsuario.Clear();
-										TxtNombres.Clear();
-										TxtApellidos.Clear();
-										TxtContraseña.Clear();
-										CbxRol.SelectedIndex = -1;
+										if (FuncUsuarios.NewUsuario(new Usuario(-1, TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text, TxtContraseña.Text, CbxRol.Text)))
+										{
+												MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+												TxtUsuario.Clear();
+												TxtNombres.Clear();
+												TxtApellidos.Clear();
+												TxtContraseña.Clear();
+												CbxRol.SelectedIndex = -1;
+										}
+										else
+										{
+												MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+												TxtUsuario.Focus();
+										}
 								}
-								else
+								else if (result == DialogResult.No)
 								{
-										MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-										TxtUsuario.Focus();
-								}
-						}
-						else if (result == DialogResult.No)
-						{
 										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+								}
 						}
+						
 				}
 		}
 }

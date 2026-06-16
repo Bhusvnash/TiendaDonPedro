@@ -29,7 +29,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 														lector["nombre_cliente"].ToString(),
 														lector["direccion_cliente"].ToString(),
 														lector["email_cliente"].ToString()));
-										}
+										}  
 										return clientes;
 								}
 						}

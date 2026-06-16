@@ -9,7 +9,7 @@
 
 </div>
 
----
+---****
 
 ## Descripcion del Proyecto
 
@@ -51,14 +51,14 @@ El sistema resuelve la problematica del control manual de inventario, clientes y
 
 | Categoria              | Tecnologia                                       |
 |------------------------|--------------------------------------------------|
-| **Lenguaje**           | C#                                                 |
+| **Lenguaje**           | C#                                                |
 | **Framework UI**       | Windows Forms (.NET Framework 4.8)                |
-| **Base de Datos**      | MySQL / MariaDB                                    |
+| **Base de Datos**      | MySQL / MariaDB                                   |
 | **Acceso a datos**     | MySql.Data (Connector/NET)                        |
 | **Reportes**           | EPPlus (exportacion a Excel)                      |
 | **Seguridad**          | BouncyCastle.Cryptography                         |
 | **IDE recomendado**    | Visual Studio 2019 / 2022                         |
-| **Gestor de paquetes** | NuGet                                              |
+| **Gestor de paquetes** | NuGet                                             |
 
 ---
 

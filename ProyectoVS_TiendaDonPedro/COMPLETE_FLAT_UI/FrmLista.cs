@@ -19,7 +19,7 @@ namespace COMPLETE_FLAT_UI
 				public FrmLista()
 				{
 						InitializeComponent();
-						//permisos segun rol 
+						//permisos segun rol
 				}
 
 				private void btnCerrar_Click(object sender, EventArgs e)
@@ -37,23 +37,27 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Focus();
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
-								Usuario user=null;
+								Usuario user = null;
 								try
 								{
+										//llenamos el obejo con lo que tenga selecionado el usuario
 										user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
 												DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString(),
 												DGVDatos.CurrentRow.Cells["NOMBRE_USUARIO"].Value.ToString(),
 												DGVDatos.CurrentRow.Cells["APELLIDO_USUARIO"].Value.ToString(),
 												DGVDatos.CurrentRow.Cells["PASSWORD_USUARIO"].Value.ToString(),
 												DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString());
-												FrmUsuarios f = new FrmUsuarios();
-												f.TxtApellidos.Text = user.apellido_usuario;
-												f.TxtContraseña.Text = user.password_usuario;
-												f.TxtNombres.Text = user.nombre_usuario;
-												f.TxtUsuario.Text = user.alias_usuario;
-												f.CbxRol.Text = user.rol_usuario;
-												f.TxtIDUsuario.Text = user.id_usuario.ToString();
-												f.ShowDialog();
+										//instancia del fromulario usuarios
+										FrmUsuarios f = new FrmUsuarios();
+										//llenamos los txt con la info del ususario que se quiere editar
+										f.TxtApellidos.Text = user.apellido_usuario;
+										f.TxtContraseña.Text = user.password_usuario;
+										f.TxtNombres.Text = user.nombre_usuario;
+										f.TxtUsuario.Text = user.alias_usuario;
+										f.CbxRol.Text = user.rol_usuario;
+										f.TxtIDUsuario.Text = user.id_usuario.ToString();
+										f.editando = true;
+										f.ShowDialog();
 								}
 								catch
 								{
@@ -71,11 +75,17 @@ namespace COMPLETE_FLAT_UI
 								f.ShowDialog();
 								verUsuarios();
 						}
+						if (LblTitulo.Text == "Lista de Clientes")
+						{
+								FrmClientes f = new FrmClientes();
+								MessageBox.Show("si funciona");
+								f.Show();
+						}
 				}
+
 				public void verUsuarios()
 				{
-
-					// DGVDatos.Rows.Clear();
+						// DGVDatos.Rows.Clear();
 						DGVDatos.Columns.Clear();
 						DGVDatos.DataSource = FuncUsuarios.GetUsuarios();
 						DGVDatos.ReadOnly = true;

@@ -247,7 +247,7 @@
 						this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 						this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 						this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
-						this.ClientSize = new System.Drawing.Size(455, 238);
+						this.ClientSize = new System.Drawing.Size(455, 241);
 						this.Controls.Add(this.TxtIDUsuario);
 						this.Controls.Add(this.CbxRol);
 						this.Controls.Add(this.label4);
@@ -290,6 +290,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.ComboBox CbxRol;
-        public System.Windows.Forms.TextBox TxtIDUsuario;
-    }
+				public System.Windows.Forms.TextBox TxtIDUsuario;
+		}
 }
