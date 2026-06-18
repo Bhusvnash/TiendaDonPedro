@@ -218,7 +218,7 @@
 						// 
 						this.CbxRol.FormattingEnabled = true;
 						this.CbxRol.Items.AddRange(new object[] {
-            "Administrador",
+            "Admin",
             "Cajero1",
             "Cajero2",
             "Cajero3",
