@@ -280,7 +280,7 @@ namespace COMPLETE_FLAT_UI
 						fm.DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
 						fm.DGVDatos.Columns["email_cliente"].HeaderText = "Email";
 						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-						fm.Show();
+						AbrirFormEnPanel(fm);
 				}
 
 				//METODO PARA HORA Y FECHA ACTUAL ----------------------------------------------------------
