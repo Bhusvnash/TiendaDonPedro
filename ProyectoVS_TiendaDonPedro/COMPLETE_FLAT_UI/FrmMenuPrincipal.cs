@@ -23,7 +23,7 @@ namespace COMPLETE_FLAT_UI
 				private const int WM_NCHITTEST = 132;
 				private const int HTBOTTOMRIGHT = 17;
 				private Rectangle sizeGripRectangle;
-				private Usuario sesion = Func_Login.Sesion;
+				private Usuario sesion = FuncLogin.Sesion;
 
 				protected override void WndProc(ref Message m)
 				{

@@ -47,9 +47,10 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(134, 11);
+            this.label6.Location = new System.Drawing.Point(179, 14);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(107, 17);
+            this.label6.Size = new System.Drawing.Size(127, 20);
             this.label6.TabIndex = 15;
             this.label6.Text = "Inicio de Sesión";
             // 
@@ -60,9 +61,10 @@
             this.BtnCerrar.FlatAppearance.BorderSize = 0;
             this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCerrar.Image = global::COMPLETE_FLAT_UI.Properties.Resources.Close;
-            this.BtnCerrar.Location = new System.Drawing.Point(324, 0);
+            this.BtnCerrar.Location = new System.Drawing.Point(432, 0);
+            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnCerrar.Name = "BtnCerrar";
-            this.BtnCerrar.Size = new System.Drawing.Size(38, 38);
+            this.BtnCerrar.Size = new System.Drawing.Size(51, 47);
             this.BtnCerrar.TabIndex = 4;
             this.BtnCerrar.UseVisualStyleBackColor = true;
             this.BtnCerrar.Click += new System.EventHandler(this.BtnCerrar_Click);
@@ -74,9 +76,11 @@
             this.BarraTitulo.Controls.Add(this.BtnCerrar);
             this.BarraTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.BarraTitulo.Location = new System.Drawing.Point(0, 0);
+            this.BarraTitulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BarraTitulo.Name = "BarraTitulo";
-            this.BarraTitulo.Size = new System.Drawing.Size(362, 38);
+            this.BarraTitulo.Size = new System.Drawing.Size(483, 47);
             this.BarraTitulo.TabIndex = 3;
+            this.BarraTitulo.Paint += new System.Windows.Forms.PaintEventHandler(this.BarraTitulo_Paint);
             // 
             // BtnSalir
             // 
@@ -86,9 +90,10 @@
             this.BtnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSalir.ForeColor = System.Drawing.Color.White;
-            this.BtnSalir.Location = new System.Drawing.Point(194, 156);
+            this.BtnSalir.Location = new System.Drawing.Point(259, 192);
+            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnSalir.Name = "BtnSalir";
-            this.BtnSalir.Size = new System.Drawing.Size(100, 35);
+            this.BtnSalir.Size = new System.Drawing.Size(133, 43);
             this.BtnSalir.TabIndex = 18;
             this.BtnSalir.Text = "Salir";
             this.BtnSalir.UseVisualStyleBackColor = false;
@@ -102,9 +107,10 @@
             this.BtnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnIniciar.ForeColor = System.Drawing.Color.White;
-            this.BtnIniciar.Location = new System.Drawing.Point(65, 156);
+            this.BtnIniciar.Location = new System.Drawing.Point(87, 192);
+            this.BtnIniciar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BtnIniciar.Name = "BtnIniciar";
-            this.BtnIniciar.Size = new System.Drawing.Size(100, 35);
+            this.BtnIniciar.Size = new System.Drawing.Size(133, 43);
             this.BtnIniciar.TabIndex = 17;
             this.BtnIniciar.Text = "Iniciar";
             this.BtnIniciar.UseVisualStyleBackColor = false;
@@ -115,9 +121,10 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(12, 61);
+            this.label3.Location = new System.Drawing.Point(16, 75);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 17);
+            this.label3.Size = new System.Drawing.Size(67, 20);
             this.label3.TabIndex = 16;
             this.label3.Text = "Usuario";
             // 
@@ -126,9 +133,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(14, 91);
+            this.label1.Location = new System.Drawing.Point(19, 112);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 17);
+            this.label1.Size = new System.Drawing.Size(95, 20);
             this.label1.TabIndex = 15;
             this.label1.Text = "Contraseña";
             // 
@@ -136,21 +144,23 @@
             // 
             this.TxtContraseña.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TxtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtContraseña.Location = new System.Drawing.Point(104, 88);
+            this.TxtContraseña.Location = new System.Drawing.Point(139, 108);
+            this.TxtContraseña.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TxtContraseña.MaxLength = 20;
             this.TxtContraseña.Name = "TxtContraseña";
             this.TxtContraseña.PasswordChar = '*';
-            this.TxtContraseña.Size = new System.Drawing.Size(244, 23);
+            this.TxtContraseña.Size = new System.Drawing.Size(324, 26);
             this.TxtContraseña.TabIndex = 14;
             // 
             // TxtUsuario
             // 
             this.TxtUsuario.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TxtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtUsuario.Location = new System.Drawing.Point(104, 59);
+            this.TxtUsuario.Location = new System.Drawing.Point(139, 73);
+            this.TxtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TxtUsuario.MaxLength = 100;
             this.TxtUsuario.Name = "TxtUsuario";
-            this.TxtUsuario.Size = new System.Drawing.Size(244, 23);
+            this.TxtUsuario.Size = new System.Drawing.Size(324, 26);
             this.TxtUsuario.TabIndex = 13;
             // 
             // checkBox2
@@ -158,9 +168,10 @@
             this.checkBox2.AutoSize = true;
             this.checkBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(150, 117);
+            this.checkBox2.Location = new System.Drawing.Point(200, 144);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(144, 20);
+            this.checkBox2.Size = new System.Drawing.Size(180, 24);
             this.checkBox2.TabIndex = 20;
             this.checkBox2.Text = "Mostrar Contraseña";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -168,9 +179,9 @@
             // 
             // FrmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 203);
+            this.ClientSize = new System.Drawing.Size(483, 250);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnIniciar);
@@ -181,6 +192,7 @@
             this.Controls.Add(this.BarraTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmLogin";
             this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

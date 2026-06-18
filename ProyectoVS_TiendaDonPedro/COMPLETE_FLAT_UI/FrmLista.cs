@@ -80,8 +80,8 @@ namespace COMPLETE_FLAT_UI
 						if (LblTitulo.Text == "Lista de Clientes")
 						{
 								FrmClientes f = new FrmClientes();
-								MessageBox.Show("si funciona");
-								f.Show();
+								f.ShowDialog();
+								verClientes();
 						}
 				}
 
@@ -131,6 +131,19 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["nombre_usuario"].HeaderText = "Nombre";
 						DGVDatos.Columns["apellido_usuario"].HeaderText = "Apellido";
 						DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
+				}
+
+				public void verClientes()
+				{
+						//limpiamos el Datas Grid View
+						//DGVDatos.Rows.Clear();
+						DGVDatos.Columns.Clear();
+						DGVDatos.DataSource = Func_Clientes.GetClientes();
+						DGVDatos.ReadOnly = true;
+						DGVDatos.Columns["id_cliente"].Visible = false;
+						DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";
+						DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
+						DGVDatos.Columns["email_cliente"].HeaderText = "Email";
 				}
 		}
 }

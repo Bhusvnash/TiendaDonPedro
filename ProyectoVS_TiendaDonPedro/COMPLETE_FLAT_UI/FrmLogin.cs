@@ -50,7 +50,6 @@ namespace COMPLETE_FLAT_UI
 
 				private void BtnIniciar_Click(object sender, EventArgs e)
 				{
-
 						//Comprobar contraseña : 
 						if (string.IsNullOrWhiteSpace(TxtUsuario.Text.Trim()) || string.IsNullOrWhiteSpace(TxtContraseña.Text.Trim()))
 						{
@@ -58,14 +57,14 @@ namespace COMPLETE_FLAT_UI
 								TxtUsuario.Focus();
 								return;
 						}
-						var user = Func_Login.InicialSesion(TxtUsuario.Text.Trim());
+						var user = FuncLogin.InicialSesion(TxtUsuario.Text.Trim());
 						if (user == null)
 						{
 								MessageBox.Show("Usuario no encontrado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
 								TxtUsuario.Focus();
 								return;
 						}
-						if (!Func_Login.ComprovarPassword(TxtContraseña.Text))
+						if (!FuncLogin.ComprovarPassword(TxtContraseña.Text))
 						{
 								MessageBox.Show("Error de contraseña incorrecta", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);
 								TxtContraseña.Focus();
@@ -81,5 +80,10 @@ namespace COMPLETE_FLAT_UI
         {
             TxtUsuario.Focus();
         }
-    }
+
+				private void BarraTitulo_Paint(object sender, PaintEventArgs e)
+				{
+
+				}
+		}
 }

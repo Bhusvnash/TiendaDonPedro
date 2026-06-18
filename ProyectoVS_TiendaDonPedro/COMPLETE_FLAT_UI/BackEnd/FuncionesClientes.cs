@@ -16,7 +16,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 						List<Cliente> clientes = new List<Cliente>();
 						try
 						{
-								using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
 										string consulta = "select * from  tbl_cliente limit 10";

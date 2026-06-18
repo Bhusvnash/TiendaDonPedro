@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace COMPLETE_FLAT_UI
 {
-		internal class Func_Login
+		internal class FuncLogin
 		{
 				public static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tienda_don_pedro;Uid=root;Pwd=;";
 				/*

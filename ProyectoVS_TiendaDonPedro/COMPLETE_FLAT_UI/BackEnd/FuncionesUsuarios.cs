@@ -19,7 +19,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 						List<Usuario> usuarios = new List<Usuario>();
 						try
 						{
-								using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
 										string consulta = "select * from  tbl_usuario limit 10";
@@ -46,7 +46,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 
 				public static bool NewUsuario(Usuario user)
 				{
-						using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+						using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 						{
 								try
 								{
@@ -80,7 +80,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 				{
 						try
 						{
-								using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
 										string consulta = @"UPDATE tbl_usuario
@@ -114,7 +114,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 				{
 						try
 						{
-								using (MySqlConnection cnn = new MySqlConnection(Func_Login.cadenaConexion))
+								using (MySqlConnection cnn = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										cnn.Open();
 										string consulta = @"Delete from  tbl_usuario where id_usuario = @id ";
