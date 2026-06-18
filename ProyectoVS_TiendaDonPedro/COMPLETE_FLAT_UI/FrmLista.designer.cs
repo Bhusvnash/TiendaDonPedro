@@ -61,7 +61,7 @@
 						this.DGVDatos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-						this.DGVDatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+						this.DGVDatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
 						this.DGVDatos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(61)))), ((int)(((byte)(69)))));
 						this.DGVDatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
 						this.DGVDatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -154,6 +154,7 @@
 						this.BtnEliminar.Text = "Eliminar";
 						this.BtnEliminar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 						this.BtnEliminar.UseVisualStyleBackColor = false;
+						this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
 						// 
 						// btnNuevo
 						// 
