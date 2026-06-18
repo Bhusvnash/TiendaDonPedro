@@ -43,20 +43,19 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								return null;
 						}
 				}
+
 				public static bool NewUsuario(Usuario user)
 				{
 						using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
 						{
 								try
 								{
-										
-										 conexion.Open();
+										conexion.Open();
 
-										
 										string consulta = @"
-										 INSERT INTO tbl_usuario 
-										(alias_usuario, nombre_usuario, apellido_usuario, password_usuario, rol_usuario) 
-										VALUES 
+										 INSERT INTO tbl_usuario
+										(alias_usuario, nombre_usuario, apellido_usuario, password_usuario, rol_usuario)
+										VALUES
 										(@AliasUsuario, @NombreUsuario, @ApellidoUsuario, @PasswordUsuario, @RolUsuario)";
 
 										using (var cmd = new MySqlCommand(consulta, conexion))
@@ -66,24 +65,22 @@ namespace COMPLETE_FLAT_UI.BackEnd
 												cmd.Parameters.AddWithValue("@ApellidoUsuario", user.apellido_usuario);
 												cmd.Parameters.AddWithValue("@PasswordUsuario", user.password_usuario);
 												cmd.Parameters.AddWithValue("@RolUsuario", user.rol_usuario);
-												int response =  cmd.ExecuteNonQuery();
+												int response = cmd.ExecuteNonQuery();
 												return response > 0;
 										}
 								}
-								catch 
+								catch
 								{
 										return false;
 								}
 						}
-
 				}
 
 				public static bool UpdateUsuario(Usuario user)
 				{
-					
 						try
 						{
-								using(var conexion = new MySqlConnection(Func_Login.cadenaConexion))
+								using (var conexion = new MySqlConnection(Func_Login.cadenaConexion))
 								{
 										conexion.Open();
 										string consulta = @"UPDATE tbl_usuario
@@ -104,6 +101,27 @@ namespace COMPLETE_FLAT_UI.BackEnd
 
 												int rpt = cmd.ExecuteNonQuery();
 												return rpt > 0;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
+
+				public static bool DeleteUsuario(Usuario user)
+				{
+						try
+						{
+								using (MySqlConnection cnn = new MySqlConnection(Func_Login.cadenaConexion))
+								{
+										cnn.Open();
+										string consulta = @"Delete from  tbl_usuario where id_usuario = @id ";
+										using (var sql = new MySqlCommand(consulta, cnn))
+										{
+												sql.Parameters.AddWithValue("@id", user.id_usuario);
+												return 0 < sql.ExecuteNonQuery();
 										}
 								}
 						}

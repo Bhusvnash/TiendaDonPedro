@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -49,7 +50,7 @@ namespace COMPLETE_FLAT_UI
 												DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString());
 										//instancia del fromulario usuarios
 										FrmUsuarios f = new FrmUsuarios();
-										//llenamos los txt con la info del ususario que se quiere editar
+										//llenamos los txt con la info del usuario que se quiere editar
 										f.TxtApellidos.Text = user.apellido_usuario;
 										f.TxtContraseña.Text = user.password_usuario;
 										f.TxtNombres.Text = user.nombre_usuario;
@@ -84,9 +85,43 @@ namespace COMPLETE_FLAT_UI
 						}
 				}
 
+				private void BtnEliminar_Click(object sender, EventArgs e)
+				{
+						switch (LblTitulo.Text)
+						{
+								case "Lista de Usuarios":
+										var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
+																						DGVDatos.CurrentRow.Cells["alias_usuario"].Value.ToString(),
+																						DGVDatos.CurrentRow.Cells["nombre_usuario"].Value.ToString(),
+																						DGVDatos.CurrentRow.Cells["apellido_usuario"].Value.ToString(),
+																						null,
+																						DGVDatos.CurrentRow.Cells["rol_usuario"].Value.ToString());
+										var rpt = MessageBox.Show($"Desea eliminar ha : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+										if (rpt != DialogResult.Yes) break;
+										if (FuncUsuarios.DeleteUsuario(user))
+												MessageBox.Show("El usuario ha sido eliminado", "Info",
+												MessageBoxButtons.OK, MessageBoxIcon.Information);
+										else
+												MessageBox.Show("El usuario No se pudo eliminar", "ERROR",
+												MessageBoxButtons.OK, MessageBoxIcon.Error);
+										//
+										verUsuarios();
+										break;
+								case "Lista de Clientes":
+										// problema de nico :v 
+										break;
+
+								default:
+										break;
+						}
+
+						DGVDatos.Focus();
+				}
+
 				public void verUsuarios()
 				{
-					// DGVDatos.Rows.Clear();
+						//limpiamos el Datas Grid View
+						//DGVDatos.Rows.Clear();
 						DGVDatos.Columns.Clear();
 						DGVDatos.DataSource = FuncUsuarios.GetUsuarios();
 						DGVDatos.ReadOnly = true;
@@ -96,7 +131,6 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["nombre_usuario"].HeaderText = "Nombre";
 						DGVDatos.Columns["apellido_usuario"].HeaderText = "Apellido";
 						DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
-						DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 				}
 		}
 }
