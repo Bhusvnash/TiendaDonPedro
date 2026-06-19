@@ -269,7 +269,7 @@ namespace COMPLETE_FLAT_UI
 						fm.DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";
 						fm.DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
 						fm.DGVDatos.Columns["email_cliente"].HeaderText = "Email";
-						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+						fm.verClientes();
 						AbrirFormEnPanel(fm);
 				}
 

@@ -103,7 +103,8 @@ namespace COMPLETE_FLAT_UI
 										// Validar que hay una fila seleccionada
 										if (DGVDatos.CurrentRow == null)
 										{
-												MessageBox.Show("Seleccione un usuario para eliminar.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+												MessageBox.Show("Seleccione un usuario para eliminar.", "Alerta",
+														MessageBoxButtons.OK, MessageBoxIcon.Warning);
 												return;
 										}
 
@@ -133,7 +134,7 @@ namespace COMPLETE_FLAT_UI
 										}
 										break;
 								case "Lista de Clientes":
-										// problema de nico :v 
+										verClientes();
 										break;
 
 								default:
