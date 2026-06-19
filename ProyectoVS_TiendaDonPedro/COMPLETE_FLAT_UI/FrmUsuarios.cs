@@ -108,5 +108,10 @@ namespace COMPLETE_FLAT_UI
 								}
 						}
 				}
+
+				private void FrmUsuarios_Load(object sender, EventArgs e)
+				{
+
+				}
 		}
 }

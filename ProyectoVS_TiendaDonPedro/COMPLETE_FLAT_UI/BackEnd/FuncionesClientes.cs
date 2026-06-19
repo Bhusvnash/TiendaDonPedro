@@ -38,5 +38,35 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								return null;
 						}
 				}
+
+				public static bool NewCliente(Cliente user)
+				{
+						using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+						{
+								try
+								{
+										conexion.Open();
+
+										string consulta = @"
+										 INSERT INTO tbl_cliente
+										(nombre_cliente, direccion_cliente, email_cliente)
+										VALUES
+										(@NombreCliente, @DireccionCliente, @EmailCliente)";
+
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@NombreCliente", user.nombre_cliente);
+												cmd.Parameters.AddWithValue("@DireccionCliente", user.direccion_cliente);
+												cmd.Parameters.AddWithValue("@EmailCliente", user.email_cliente);
+												int response = cmd.ExecuteNonQuery();
+												return response > 0;
+										}
+								}
+								catch
+								{
+										return false;
+								}
+						}
+				}
 		}
 }

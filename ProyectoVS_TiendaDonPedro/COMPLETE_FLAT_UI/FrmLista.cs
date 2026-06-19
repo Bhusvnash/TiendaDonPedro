@@ -59,6 +59,9 @@ namespace COMPLETE_FLAT_UI
 										f.TxtIDUsuario.Text = user.id_usuario.ToString();
 										f.editando = true;
 										f.ShowDialog();
+
+										FrmClientes a = new FrmClientes();
+										a.editando = true;
 								}
 								catch
 								{
