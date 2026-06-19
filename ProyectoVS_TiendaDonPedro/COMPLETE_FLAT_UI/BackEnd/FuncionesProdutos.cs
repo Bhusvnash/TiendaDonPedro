@@ -18,14 +18,15 @@ namespace COMPLETE_FLAT_UI
 								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consulta = "SELECT * FROM tbl_producto";
+										string consulta = @"select * from tbl_categoria join tbl_producto on 
+										tbl_categoria.id_categoria = tbl_producto.id_categoria";
 										var cmd = new MySqlCommand(consulta, conexion);
 										var lector = cmd.ExecuteReader();
-
 										while (lector.Read())
 										{
 												productos.Add(new Producto(
 														Convert.ToInt64(lector["id_producto"]),
+														lector["des_categoria"].ToString(),
 														lector["nombre_producto"].ToString(),
 														Convert.ToInt64(lector["precio_producto"]),
 														Convert.ToInt32(lector["stock_producto"]),

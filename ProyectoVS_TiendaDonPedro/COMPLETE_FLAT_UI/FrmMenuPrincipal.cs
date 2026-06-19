@@ -215,12 +215,14 @@ namespace COMPLETE_FLAT_UI
 						FrmLista fm = new FrmLista();
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Productos";
+						fm.verProductos();
 						AbrirFormEnPanel(fm);
 				}
 				private void FormMenuPrincipal_Resize(object sender, EventArgs e)
 				{
 						int largoform = this.Height;
 						BtnSalir.Location = new Point(3, largoform - 110);
+
 				}
 
 				private void BtnCategorias_Click(object sender, EventArgs e)

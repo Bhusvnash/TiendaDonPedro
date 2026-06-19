@@ -71,9 +71,6 @@ namespace COMPLETE_FLAT_UI
 
 										f.editando = true;
 										f.ShowDialog();
-
-										FrmClientes a = new FrmClientes();
-										a.editando = true;
 								}
 								catch
 								{
@@ -82,6 +79,7 @@ namespace COMPLETE_FLAT_UI
 								}
 								verUsuarios();
 						}
+<<<<<<< HEAD
 						else if (LblTitulo.Text == "Lista de Clientes")
 						{
 								FrmClientes f = new FrmClientes();
@@ -94,7 +92,10 @@ namespace COMPLETE_FLAT_UI
 								MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
 				}
+=======
+>>>>>>> ae76b1c (no se we)
 
+				}
 				private void btnNuevo_Click(object sender, EventArgs e)
 				{
 						if (LblTitulo.Text == "Lista de Usuarios")
@@ -173,6 +174,24 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["nombre_usuario"].HeaderText = "Nombre";
 						DGVDatos.Columns["apellido_usuario"].HeaderText = "Apellido";
 						DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
+				}
+
+				public void verProductos()
+				{
+						DGVDatos.Columns.Clear();
+						DGVDatos.DataSource = FuncionesProdutos.GetProductos();
+						DGVDatos.ReadOnly = true;
+
+						// Ocultar columnas
+						DGVDatos.Columns["id_producto"].Visible = false;
+						DGVDatos.Columns["id_categoria"].Visible = false;
+
+						// Cambiar títulos
+						DGVDatos.Columns["des_categoria"].HeaderText = "Categoría";
+						DGVDatos.Columns["nombre_producto"].HeaderText = "Producto";
+						DGVDatos.Columns["precio_producto"].HeaderText = "Precio";
+						DGVDatos.Columns["stock_producto"].HeaderText = "Stock";
+						DGVDatos.Columns["iva_producto"].HeaderText = "IVA";
 				}
 
 				public void verClientes()
