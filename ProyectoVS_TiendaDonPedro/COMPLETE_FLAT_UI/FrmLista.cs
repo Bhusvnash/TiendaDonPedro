@@ -90,6 +90,8 @@ namespace COMPLETE_FLAT_UI
 								f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
 								f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
 								f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
+
+								MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
 				}
 
