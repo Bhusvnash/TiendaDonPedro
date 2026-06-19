@@ -67,6 +67,8 @@ namespace COMPLETE_FLAT_UI
 										f.TxtUsuario.Text = user.alias_usuario;
 										f.CbxRol.Text = user.rol_usuario;
 										f.TxtIDUsuario.Text = user.id_usuario.ToString();
+
+
 										f.editando = true;
 										f.ShowDialog();
 
@@ -79,6 +81,15 @@ namespace COMPLETE_FLAT_UI
 										return;
 								}
 								verUsuarios();
+						}
+						else if (LblTitulo.Text == "Lista de Clientes")
+						{
+								FrmClientes f = new FrmClientes();
+								f.editando = true;
+
+								f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
+								f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
+								f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
 						}
 				}
 

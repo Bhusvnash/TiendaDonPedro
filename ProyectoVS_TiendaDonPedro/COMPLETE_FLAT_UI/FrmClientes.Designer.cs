@@ -39,6 +39,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.TxtDireccion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.id_cliente = new System.Windows.Forms.TextBox();
             this.BarraTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCerrar.Image = global::COMPLETE_FLAT_UI.Properties.Resources.Close;
             this.BtnCerrar.Location = new System.Drawing.Point(624, 0);
-            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnCerrar.Name = "BtnCerrar";
             this.BtnCerrar.Size = new System.Drawing.Size(51, 47);
             this.BtnCerrar.TabIndex = 4;
@@ -63,7 +64,7 @@
             this.BarraTitulo.Controls.Add(this.LblTituloFormCliente);
             this.BarraTitulo.Controls.Add(this.BtnCerrar);
             this.BarraTitulo.Location = new System.Drawing.Point(0, 2);
-            this.BarraTitulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BarraTitulo.Margin = new System.Windows.Forms.Padding(4);
             this.BarraTitulo.Name = "BarraTitulo";
             this.BarraTitulo.Size = new System.Drawing.Size(675, 47);
             this.BarraTitulo.TabIndex = 25;
@@ -89,7 +90,7 @@
             this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSalir.ForeColor = System.Drawing.Color.White;
             this.BtnSalir.Location = new System.Drawing.Point(364, 184);
-            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(133, 43);
             this.BtnSalir.TabIndex = 35;
@@ -106,7 +107,7 @@
             this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnGuardar.ForeColor = System.Drawing.Color.White;
             this.BtnGuardar.Location = new System.Drawing.Point(192, 184);
-            this.BtnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(133, 43);
             this.BtnGuardar.TabIndex = 34;
@@ -120,7 +121,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtCorreo.Location = new System.Drawing.Point(147, 136);
-            this.TxtCorreo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtCorreo.Margin = new System.Windows.Forms.Padding(4);
             this.TxtCorreo.Name = "TxtCorreo";
             this.TxtCorreo.Size = new System.Drawing.Size(475, 26);
             this.TxtCorreo.TabIndex = 32;
@@ -144,7 +145,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtNombre.Location = new System.Drawing.Point(147, 54);
-            this.TxtNombre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(475, 26);
             this.TxtNombre.TabIndex = 30;
@@ -167,7 +168,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtDireccion.Location = new System.Drawing.Point(147, 95);
-            this.TxtDireccion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtDireccion.Margin = new System.Windows.Forms.Padding(4);
             this.TxtDireccion.Name = "TxtDireccion";
             this.TxtDireccion.Size = new System.Drawing.Size(475, 26);
             this.TxtDireccion.TabIndex = 27;
@@ -184,12 +185,20 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "Direccion:";
             // 
+            // id_cliente
+            // 
+            this.id_cliente.Location = new System.Drawing.Point(154, 291);
+            this.id_cliente.Name = "id_cliente";
+            this.id_cliente.Size = new System.Drawing.Size(468, 22);
+            this.id_cliente.TabIndex = 36;
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
-            this.ClientSize = new System.Drawing.Size(674, 240);
+            this.ClientSize = new System.Drawing.Size(674, 255);
+            this.Controls.Add(this.id_cliente);
             this.Controls.Add(this.BtnSalir);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.TxtCorreo);
@@ -200,7 +209,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BarraTitulo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmClientes";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FrmClientes";
@@ -224,5 +233,6 @@
         public System.Windows.Forms.TextBox TxtDireccion;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label LblTituloFormCliente;
-    }
+				public System.Windows.Forms.TextBox id_cliente;
+		}
 }

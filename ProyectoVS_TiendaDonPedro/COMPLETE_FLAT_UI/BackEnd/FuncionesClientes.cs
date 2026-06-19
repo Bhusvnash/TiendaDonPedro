@@ -68,5 +68,35 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								}
 						}
 				}
+
+				public static bool UpdateCliente(Cliente user)
+				{
+						try
+						{
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = @"UPDATE tbl_cliente
+                                SET nombre_cliente = @nombre,
+                                    direccion_cliente = @direccion,
+                                    email_cliente = @correo,
+                                WHERE id_cliente = @id";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@id", user.id_cliente);
+												cmd.Parameters.AddWithValue("@nombre", user.nombre_cliente);
+												cmd.Parameters.AddWithValue("@direccion", user.direccion_cliente);
+												cmd.Parameters.AddWithValue("@correo", user.email_cliente);
+
+												int rpt = cmd.ExecuteNonQuery();
+												return rpt > 0;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
 		}
 }

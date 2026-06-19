@@ -89,9 +89,9 @@ namespace COMPLETE_FLAT_UI
 								{
 										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
 								}
-								Cliente user = new Cliente(-1, TxtNombre.Text, TxtDireccion.Text, TxtCorreo.Text);
+								Cliente cliente = new Cliente(-1, TxtNombre.Text, TxtDireccion.Text, TxtCorreo.Text);
 
-								if (Func_Clientes.NewCliente(user))
+								if (Func_Clientes.NewCliente(cliente))
 								{
 										MessageBox.Show("Usuario registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										//limpiamos los campos
@@ -103,10 +103,12 @@ namespace COMPLETE_FLAT_UI
 										TxtNombre.Focus();
 								}
 						}
-						/*
+						
 						//esta editando
 						if (editando)
 						{
+								MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+								/*
 								//preguntamos si quiera continuar con los datos que tiene
 								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtNombre.Text}, {TxtDireccion.Text}, {TxtCorreo.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 								if (result != DialogResult.Yes)
@@ -114,8 +116,8 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Operación cancelada", "Cancelación", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
-								Usuario user = new Cliente(Convert.ToInt64(TxtIDUsuario.Text), TxtUsuario.Text, TxtNombres.Text, TxtApellidos.Text);
-								if (FuncUsuarios.UpdateUsuario(user))
+								Cliente cliente = new Cliente(Convert.ToInt64(id_cliente.Text), TxtNombre.Text, TxtDireccion.Text, TxtCorreo.Text);
+								if (Func_Clientes.UpdateCliente(cliente))
 								{
 										MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										TxtNombre.Clear(); TxtDireccion.Clear(); TxtCorreo.Clear();;
@@ -125,8 +127,9 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Error: No se pudo actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 										TxtNombre.Focus();
 								}
+								*/
 						}
-						*/
+						
 				}
 		}
 }
