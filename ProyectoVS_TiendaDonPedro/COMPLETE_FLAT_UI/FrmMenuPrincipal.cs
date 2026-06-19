@@ -189,8 +189,10 @@ namespace COMPLETE_FLAT_UI
 				private void FormMenuPrincipal_Load(object sender, EventArgs e)
 				{
 						MostrarFormLogo();
-						Lbl_Usuario_Apellido.Text = sesion.apellido_usuario;
-						Lbl_Usuario_Nombre.Text = sesion.nombre_usuario;
+
+						Lbl_Usuario_Apellido.Text = FuncLogin.Sesion.apellido_usuario;
+						Lbl_Usuario_Nombre.Text = FuncLogin.Sesion.nombre_usuario;
+					
 				}
 
 				//METODO PARA MOSTRAR FORMULARIO DE LOGO Al CERRAR OTROS FORM ----------------------------------------------------------
@@ -215,7 +217,6 @@ namespace COMPLETE_FLAT_UI
 						fm.LblTitulo.Text = "Lista de Productos";
 						AbrirFormEnPanel(fm);
 				}
-
 				private void FormMenuPrincipal_Resize(object sender, EventArgs e)
 				{
 						int largoform = this.Height;
@@ -258,7 +259,7 @@ namespace COMPLETE_FLAT_UI
 				private void btnListaClientes_Click(object sender, EventArgs e)
 				{
 						FrmLista fm = new FrmLista();
-					//	fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
+						//	fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Clientes";
 						fm.DGVDatos.DataSource = Func_Clientes.GetClientes();
 						fm.DGVDatos.ReadOnly = true;
@@ -268,7 +269,7 @@ namespace COMPLETE_FLAT_UI
 						fm.DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";
 						fm.DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
 						fm.DGVDatos.Columns["email_cliente"].HeaderText = "Email";
-						fm.DGVDatos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+						fm.verClientes();
 						AbrirFormEnPanel(fm);
 				}
 

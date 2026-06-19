@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZstdSharp.Unsafe;
 
 namespace COMPLETE_FLAT_UI
 {
@@ -21,6 +22,15 @@ namespace COMPLETE_FLAT_UI
 				{
 						InitializeComponent();
 						//permisos segun rol
+						if (FuncLogin.Sesion.rol_usuario != "Admin")
+						{
+								btnEditar.Enabled = false;
+								btnNuevo.Enabled = false;
+								BtnEliminar.Enabled = false;
+								btnEditar.Enabled = false;
+						}
+
+
 				}
 
 				private void btnCerrar_Click(object sender, EventArgs e)
@@ -93,25 +103,41 @@ namespace COMPLETE_FLAT_UI
 						switch (LblTitulo.Text)
 						{
 								case "Lista de Usuarios":
-										var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
-																						DGVDatos.CurrentRow.Cells["alias_usuario"].Value.ToString(),
-																						DGVDatos.CurrentRow.Cells["nombre_usuario"].Value.ToString(),
-																						DGVDatos.CurrentRow.Cells["apellido_usuario"].Value.ToString(),
-																						null,
-																						DGVDatos.CurrentRow.Cells["rol_usuario"].Value.ToString());
-										var rpt = MessageBox.Show($"Desea eliminar ha : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-										if (rpt != DialogResult.Yes) break;
-										if (FuncUsuarios.DeleteUsuario(user))
-												MessageBox.Show("El usuario ha sido eliminado", "Info",
-												MessageBoxButtons.OK, MessageBoxIcon.Information);
-										else
-												MessageBox.Show("El usuario No se pudo eliminar", "ERROR",
+										// Validar que hay una fila seleccionada
+										if (DGVDatos.CurrentRow == null)
+										{
+												MessageBox.Show("Seleccione un usuario para eliminar.", "Alerta",
+														MessageBoxButtons.OK, MessageBoxIcon.Warning);
+												return;
+										}
+
+										try
+										{
+												var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["alias_usuario"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_usuario"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["apellido_usuario"].Value),
+																								null,
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["rol_usuario"].Value));
+												var rpt = MessageBox.Show($"Desea eliminar ha : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+												if (rpt != DialogResult.Yes) break;
+												if (FuncUsuarios.DeleteUsuario(user))
+														MessageBox.Show("El usuario ha sido eliminado", "Info",
+														MessageBoxButtons.OK, MessageBoxIcon.Information);
+												else
+														MessageBox.Show("El usuario No se pudo eliminar", "ERROR",
+														MessageBoxButtons.OK, MessageBoxIcon.Error);
+												//
+												verUsuarios();
+										}
+										catch (Exception ex)
+										{
+												MessageBox.Show($"Error al eliminar el usuario: {ex.Message}", "Error",
 												MessageBoxButtons.OK, MessageBoxIcon.Error);
-										//
-										verUsuarios();
+										}
 										break;
 								case "Lista de Clientes":
-										// problema de nico :v 
+										verClientes();
 										break;
 
 								default:
