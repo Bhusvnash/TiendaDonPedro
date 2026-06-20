@@ -230,6 +230,7 @@ namespace COMPLETE_FLAT_UI
 						FrmLista fm = new FrmLista();
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Categorias";
+						fm.VerCategorias();
 						AbrirFormEnPanel(fm);
 				}
 

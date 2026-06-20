@@ -97,7 +97,7 @@ namespace COMPLETE_FLAT_UI
 								
 								Producto prod = new Producto(-1, TxtNombre.Text, Convert.ToInt64(TxtPrecio.Text), Convert.ToInt32(TxtStock.Text), Convert.ToDouble(TxtIVA.Text), idCategoria);
 
-								if (FuncionesProdutos.NewProducto(prod))
+								if (FuncProductos.NewProducto(prod))
 								{
 										MessageBox.Show("Producto registrado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										TxtNombre.Clear(); TxtPrecio.Clear(); TxtStock.Clear(); TxtIVA.Clear(); CbxCategoria.SelectedIndex = -1;
@@ -123,7 +123,7 @@ namespace COMPLETE_FLAT_UI
 								}
 								
 								Producto prod = new Producto(idProducto, TxtNombre.Text, Convert.ToInt64(TxtPrecio.Text), Convert.ToInt32(TxtStock.Text), Convert.ToDouble(TxtIVA.Text), idCategoria);
-								if (FuncionesProdutos.UpdateProducto(prod))
+								if (FuncProductos.UpdateProducto(prod))
 								{
 										MessageBox.Show("Producto actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										TxtNombre.Clear(); TxtPrecio.Clear(); TxtStock.Clear(); TxtIVA.Clear(); CbxCategoria.SelectedIndex = -1;

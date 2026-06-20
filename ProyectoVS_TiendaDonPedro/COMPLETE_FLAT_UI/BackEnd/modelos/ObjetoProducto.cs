@@ -7,7 +7,6 @@
 				public long precio_producto { get; set; }
 				public int stock_producto { get; set; }
 				public double iva_producto { get; set; }
-
 				public long id_categoria { get; set; }
 
 				public Producto(

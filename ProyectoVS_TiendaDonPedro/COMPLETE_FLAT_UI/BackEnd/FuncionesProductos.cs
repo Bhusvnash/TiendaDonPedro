@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace COMPLETE_FLAT_UI
 {
-		internal class FuncionesProdutos
+		internal class FuncProductos
 		{
 				public static List<Producto> GetProductos()
 				{

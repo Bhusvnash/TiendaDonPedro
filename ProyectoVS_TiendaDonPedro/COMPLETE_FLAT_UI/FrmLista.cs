@@ -1,4 +1,5 @@
-﻿using COMPLETE_FLAT_UI.BackEnd;
+using COMPLETE_FLAT_UI.BackEnd;
+using COMPLETE_FLAT_UI.BackEnd.modelos;
 using Org.BouncyCastle.Asn1.Crmf;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace COMPLETE_FLAT_UI
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
 								#region EditarUsuario
+
 								try
 								{
 										//instancia del fromulario usuarios
@@ -57,7 +59,6 @@ namespace COMPLETE_FLAT_UI
 										f.TxtUsuario.Text = DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString();
 										f.CbxRol.Text = DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString();
 										f.TxtIDUsuario.Text = DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value.ToString();
-
 										f.editando = true;
 										f.ShowDialog();
 								}
@@ -67,7 +68,8 @@ namespace COMPLETE_FLAT_UI
 										return;
 								}
 								VerUsuarios();
-								#endregion
+
+								#endregion EditarUsuario
 						}
 
 						if (LblTitulo.Text == "Lista de Clientes")
@@ -81,39 +83,76 @@ namespace COMPLETE_FLAT_UI
 										f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
 										f.editando = true;
 										f.ShowDialog();
+										verClientes();
 								}
 								catch
 								{
-										MessageBox.Show("Por favor seleccione un cliente para editar", "Selección de Cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										MessageBox.Show("Por favor seleccione un cliente para editar", "Selección de Cliente",
+												MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
 						}
-					
-					if(LblTitulo.Text == "Lista de Productos")
-					{
+
+						if (LblTitulo.Text == "Lista de Productos")
+						{
 								#region EditarProducto
+
 								try
 								{
-								FrmProductos formProducto = new FrmProductos();
+										FrmProductos formProducto = new FrmProductos();
+										//id_categoria
+										long idCategoria = Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString());
+										var categorias = FuncCategorias.GetCategorias();
+										//any = existe elementos => true/false
+										// el ? dice : aplicar lo lo siguiente solo si no es null
 
-								formProducto.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_producto"].Value.ToString();
-								formProducto.TxtPrecio.Text = DGVDatos.CurrentRow.Cells["precio_producto"].Value.ToString();
-								formProducto.TxtStock.Text = DGVDatos.CurrentRow.Cells["stock_producto"].Value.ToString();
-								formProducto.CbxCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
-								formProducto.TxtIVA.Text = DGVDatos.CurrentRow.Cells["iva_producto"].Value.ToString();
-								formProducto.editando = true;
-								formProducto.ShowDialog();
+										if (categorias?.Any() == true || categorias != null)
+										{
+												var objCategoria = categorias.FirstOrDefault(item => item.id_categoria == idCategoria);
+												formProducto.CbxCategoria.SelectedValue = objCategoria.des_categoria;
+												foreach (var item in categorias)
+												{
+														formProducto.CbxCategoria.Items.Add(item);
+												}
+										}
+										else
+										{
+												formProducto.CbxCategoria.Items.Add("N/A");
+										}
+										formProducto.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_producto"].Value.ToString();
+										formProducto.TxtPrecio.Text = DGVDatos.CurrentRow.Cells["precio_producto"].Value.ToString();
+										formProducto.TxtStock.Text = DGVDatos.CurrentRow.Cells["stock_producto"].Value.ToString();
+										formProducto.CbxCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
+										formProducto.TxtIVA.Text = DGVDatos.CurrentRow.Cells["iva_producto"].Value.ToString();
+										formProducto.editando = true;
+										formProducto.ShowDialog();
+										VerProductos();
+								}
+								catch
+								{
+										MessageBox.Show("Por favor seleccione un producto para editar", "Selección de Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										return;
+								}
+
+								#endregion EditarProducto
 						}
-						catch
+
+						if (LblTitulo.Text == "Lista de Categorias")
 						{
-								MessageBox.Show("Por favor seleccione un producto para editar", "Selección de Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
-								return;
-						}
-# endregion 
-						}
+								#region EditarCategorias
 
+								var fmCategorias = new FrmCategorias();
+								fmCategorias.TxtDescripcion.Text = DGVDatos.CurrentRow.Cells["des_categoria"].Value.ToString();
+								fmCategorias.TxtIDCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
+								fmCategorias.editando = true;
+								fmCategorias.ShowDialog();
+								VerCategorias();
+
+								#endregion EditarCategorias
+						}
 						DGVDatos.Focus();
-				}		 
+				}
+
 				private void btnNuevo_Click(object sender, EventArgs e)
 				{
 						if (LblTitulo.Text == "Lista de Usuarios")
@@ -132,15 +171,22 @@ namespace COMPLETE_FLAT_UI
 						{
 								var formProductos = new FrmProductos();
 								//llenamos el ComboBox con categorias
-								var categorias = FuncionesProdutos.TemGetCategorias();
-								//any = existe elementos => true/false 
-								// el ? dice : aplicar lo lo siguiente solo si no es null 
+								var categorias = FuncProductos.TemGetCategorias();
+								//any = existe elementos => true/false
+								// el ? dice : aplicar lo lo siguiente solo si no es null
 								if (categorias?.Any() == true)
 										formProductos.CbxCategoria.Items.AddRange(categorias.ToArray());
 								else
 										formProductos.CbxCategoria.Items.Add("N/A");
 								formProductos.ShowDialog();
 								VerProductos();
+						}
+						if (LblTitulo.Text == "Lista de Categorias")
+						{
+								var fmCategoria = new FrmCategorias();
+								fmCategoria.editando = false;
+								fmCategoria.ShowDialog();
+								VerCategorias();
 						}
 						//linea necesaria para evitar errores por perdida de focus
 						DGVDatos.Focus();
@@ -150,9 +196,10 @@ namespace COMPLETE_FLAT_UI
 				{
 						switch (LblTitulo.Text)
 						{
-
 								case "Lista de Usuarios":
+
 										#region EliminarUsuario
+
 										// Validar que hay una fila seleccionada
 										if (DGVDatos.CurrentRow == null)
 										{
@@ -163,7 +210,6 @@ namespace COMPLETE_FLAT_UI
 
 										try
 										{
-										
 												var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["alias_usuario"].Value),
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_usuario"].Value),
@@ -187,9 +233,34 @@ namespace COMPLETE_FLAT_UI
 												MessageBoxButtons.OK, MessageBoxIcon.Error);
 										}
 										break;
-										#endregion
+
+										#endregion EliminarUsuario
+
 								case "Lista de Clientes":
 										verClientes();
+										break;
+
+								case "Lista de Categorias":
+										//objeto de lo que este selecionando el usuario
+										try
+										{
+												Categoria categoria = new Categoria(
+												Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_categoria"].Value),
+												Convert.ToString(DGVDatos.CurrentRow.Cells["des_categoria"].Value)
+											);
+												if (FuncCategorias.DeleteCategoria(categoria))
+														MessageBox.Show("La categoria ha sido eliminada", "Info",
+														MessageBoxButtons.OK, MessageBoxIcon.Information);
+												else
+														MessageBox.Show("La categoria No se pudo eliminar", "ERROR",
+														MessageBoxButtons.OK, MessageBoxIcon.Error);
+										}
+										catch
+										{
+												MessageBox.Show("Error al elminiar la categoria", "Error",
+														MessageBoxButtons.OK, MessageBoxIcon.Error);
+										}
+										VerCategorias();
 										break;
 
 								default:
@@ -217,7 +288,7 @@ namespace COMPLETE_FLAT_UI
 				public void VerProductos()
 				{
 						DGVDatos.Columns.Clear();
-						DGVDatos.DataSource = FuncionesProdutos.GetProductos();
+						DGVDatos.DataSource = FuncProductos.GetProductos();
 						DGVDatos.ReadOnly = true;
 
 						// Ocultar columnas
@@ -242,6 +313,14 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";
 						DGVDatos.Columns["direccion_cliente"].HeaderText = "Direccion";
 						DGVDatos.Columns["email_cliente"].HeaderText = "Email";
+				}
+
+				public void VerCategorias()
+				{
+						var categorias = FuncCategorias.GetCategorias();
+						DGVDatos.DataSource = categorias;
+						DGVDatos.Columns["id_categoria"].Visible = false;
+						DGVDatos.Columns["des_categoria"].HeaderText = "Categoria";
 				}
 		}
 }
