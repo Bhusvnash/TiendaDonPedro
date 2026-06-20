@@ -45,6 +45,7 @@ namespace COMPLETE_FLAT_UI
 				{
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
+								#region EditarUsuario
 								try
 								{
 										//instancia del fromulario usuarios
@@ -65,9 +66,11 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
-								verUsuarios();
+								VerUsuarios();
+								#endregion
 						}
-						else if (LblTitulo.Text == "Lista de Clientes")
+
+						if (LblTitulo.Text == "Lista de Clientes")
 						{
 								try
 								{
@@ -76,7 +79,6 @@ namespace COMPLETE_FLAT_UI
 										f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
 										f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
 										f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
-
 										f.editando = true;
 										f.ShowDialog();
 								}
@@ -86,19 +88,39 @@ namespace COMPLETE_FLAT_UI
 										return;
 								}
 						}
-						DGVDatos.Focus();
-				}
-<<<<<<< HEAD
-=======
+					
+					if(LblTitulo.Text == "Lista de Productos")
+					{
+								#region EditarProducto
+								try
+								{
+								FrmProductos formProducto = new FrmProductos();
 
->>>>>>> 510b103 (VerProductos)
+								formProducto.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_producto"].Value.ToString();
+								formProducto.TxtPrecio.Text = DGVDatos.CurrentRow.Cells["precio_producto"].Value.ToString();
+								formProducto.TxtStock.Text = DGVDatos.CurrentRow.Cells["stock_producto"].Value.ToString();
+								formProducto.CbxCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
+								formProducto.TxtIVA.Text = DGVDatos.CurrentRow.Cells["iva_producto"].Value.ToString();
+								formProducto.editando = true;
+								formProducto.ShowDialog();
+						}
+						catch
+						{
+								MessageBox.Show("Por favor seleccione un producto para editar", "Selección de Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+								return;
+						}
+# endregion 
+						}
+
+						DGVDatos.Focus();
+				}		 
 				private void btnNuevo_Click(object sender, EventArgs e)
 				{
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
 								FrmUsuarios formUsuarios = new FrmUsuarios();
 								formUsuarios.ShowDialog();
-								verUsuarios();
+								VerUsuarios();
 						}
 						if (LblTitulo.Text == "Lista de Clientes")
 						{
@@ -106,26 +128,19 @@ namespace COMPLETE_FLAT_UI
 								f.ShowDialog();
 								verClientes();
 						}
-
 						if (LblTitulo.Text == "Lista de Productos")
 						{
 								var formProductos = new FrmProductos();
 								//llenamos el ComboBox con categorias
-								var categoias = FuncionesProdutos.TemGetCategorias();
-								if (categoias.Count < 0 || categoias == null)
-								{
-										formProductos.CbxCategoria.Items.Add("N/A");
-								}
+								var categorias = FuncionesProdutos.TemGetCategorias();
+								//any = existe elementos => true/false 
+								// el ? dice : aplicar lo lo siguiente solo si no es null 
+								if (categorias?.Any() == true)
+										formProductos.CbxCategoria.Items.AddRange(categorias.ToArray());
 								else
-								{
-										foreach (var item in categoias)
-										{
-												formProductos.CbxCategoria.Items.Add(item);
-										}
-										
-								}
+										formProductos.CbxCategoria.Items.Add("N/A");
 								formProductos.ShowDialog();
-								verProductos();
+								VerProductos();
 						}
 						//linea necesaria para evitar errores por perdida de focus
 						DGVDatos.Focus();
@@ -135,7 +150,9 @@ namespace COMPLETE_FLAT_UI
 				{
 						switch (LblTitulo.Text)
 						{
+
 								case "Lista de Usuarios":
+										#region EliminarUsuario
 										// Validar que hay una fila seleccionada
 										if (DGVDatos.CurrentRow == null)
 										{
@@ -146,6 +163,7 @@ namespace COMPLETE_FLAT_UI
 
 										try
 										{
+										
 												var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["alias_usuario"].Value),
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_usuario"].Value),
@@ -161,7 +179,7 @@ namespace COMPLETE_FLAT_UI
 														MessageBox.Show("El usuario No se pudo eliminar", "ERROR",
 														MessageBoxButtons.OK, MessageBoxIcon.Error);
 												//
-												verUsuarios();
+												VerUsuarios();
 										}
 										catch (Exception ex)
 										{
@@ -169,7 +187,7 @@ namespace COMPLETE_FLAT_UI
 												MessageBoxButtons.OK, MessageBoxIcon.Error);
 										}
 										break;
-
+										#endregion
 								case "Lista de Clientes":
 										verClientes();
 										break;
@@ -181,7 +199,7 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Focus();
 				}
 
-				public void verUsuarios()
+				public void VerUsuarios()
 				{
 						//limpiamos el Datas Grid View
 						//DGVDatos.Rows.Clear();
@@ -196,7 +214,7 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["rol_usuario"].HeaderText = "Rol";
 				}
 
-				public void verProductos()
+				public void VerProductos()
 				{
 						DGVDatos.Columns.Clear();
 						DGVDatos.DataSource = FuncionesProdutos.GetProductos();
@@ -207,7 +225,6 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns["id_categoria"].Visible = false;
 
 						// Cambiar títulos
-						DGVDatos.Columns["des_categoria"].HeaderText = "Categoría";
 						DGVDatos.Columns["nombre_producto"].HeaderText = "Producto";
 						DGVDatos.Columns["precio_producto"].HeaderText = "Precio";
 						DGVDatos.Columns["stock_producto"].HeaderText = "Stock";

@@ -206,7 +206,7 @@ namespace COMPLETE_FLAT_UI
 						FrmLista fm = new FrmLista();
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Usuarios";
-						fm.verUsuarios();
+						fm.VerUsuarios();
 						AbrirFormEnPanel(fm);
 				}
 
@@ -215,7 +215,7 @@ namespace COMPLETE_FLAT_UI
 						FrmLista fm = new FrmLista();
 						fm.FormClosed += new FormClosedEventHandler(MostrarFormLogoAlCerrarForms);
 						fm.LblTitulo.Text = "Lista de Productos";
-						fm.verProductos();
+						fm.VerProductos();
 						AbrirFormEnPanel(fm);
 				}
 				private void FormMenuPrincipal_Resize(object sender, EventArgs e)

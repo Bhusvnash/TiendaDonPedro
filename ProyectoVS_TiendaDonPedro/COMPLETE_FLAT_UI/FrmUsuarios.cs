@@ -33,6 +33,8 @@ namespace COMPLETE_FLAT_UI
 
 				private void BtnGuardar_Click(object sender, EventArgs e)
 				{
+						#region TxtNotNull
+
 						if (string.IsNullOrWhiteSpace(TxtUsuario.Text))
 						{
 								MessageBox.Show("Falta el campo Usuario (Alias)", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -63,9 +65,13 @@ namespace COMPLETE_FLAT_UI
 								CbxRol.Focus();
 								return;
 						}
-						//si no esta editando editando
+
+						#endregion TxtNotNull
+
 						if (!editando)
 						{
+								#region Nuevo
+
 								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 								if (result != DialogResult.Yes)
 								{
@@ -84,10 +90,12 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Error: No se pudo registrar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 										TxtUsuario.Focus();
 								}
+
+								#endregion 
 						}
-						//esta editando
 						if (editando)
 						{
+								#region Editando
 								//preguntamos si quiera continuar con los datos que tiene
 								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtUsuario.Text}, {TxtNombres.Text}, {TxtApellidos.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 								if (result != DialogResult.Yes)
@@ -106,12 +114,12 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Error: No se pudo actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 										TxtUsuario.Focus();
 								}
+								#endregion
 						}
 				}
 
 				private void FrmUsuarios_Load(object sender, EventArgs e)
 				{
-
 				}
 		}
 }
