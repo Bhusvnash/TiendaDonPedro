@@ -109,6 +109,7 @@ namespace COMPLETE_FLAT_UI
 						}
 				}
 
+
 				public static bool DeleteProducto(Producto producto)
 				{
 						try
@@ -129,5 +130,33 @@ namespace COMPLETE_FLAT_UI
 								return false;
 						}
 				}
+				public static List<string> TemGetCategorias()
+				{
+						//  select des_categoria  from tbl_categoria group by des_categoria;
+						try
+						{
+								List<string> categorias = new List<string>();
+								using(MySqlConnection  conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = " select des_categoria  from tbl_categoria group by des_categoria ";
+										using(MySqlCommand cmd = new MySqlCommand(consulta, conexion))
+										{
+												var reader = cmd.ExecuteReader();
+												while (reader.Read())
+												{
+														categorias.Add(reader["des_categoria"].ToString());
+												}
+												return categorias;
+										}
+								}
+						}
+						catch
+						{
+								return null;
+						}
+						
+				}
+
 		}
 }

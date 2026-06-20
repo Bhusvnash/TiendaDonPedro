@@ -281,6 +281,6 @@
         public System.Windows.Forms.Label LblTituloForm;
         public System.Windows.Forms.TextBox TxtIVA;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox CbxCategoria;
+        public System.Windows.Forms.ComboBox CbxCategoria;
     }
 }

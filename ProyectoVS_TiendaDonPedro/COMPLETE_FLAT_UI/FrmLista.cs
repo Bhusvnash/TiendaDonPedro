@@ -29,8 +29,6 @@ namespace COMPLETE_FLAT_UI
 								BtnEliminar.Enabled = false;
 								btnEditar.Enabled = false;
 						}
-
-
 				}
 
 				private void btnCerrar_Click(object sender, EventArgs e)
@@ -45,7 +43,6 @@ namespace COMPLETE_FLAT_UI
 
 				private void btnEditar_Click(object sender, EventArgs e)
 				{
-						DGVDatos.Focus();
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
 								try
@@ -59,7 +56,6 @@ namespace COMPLETE_FLAT_UI
 										f.TxtUsuario.Text = DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString();
 										f.CbxRol.Text = DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString();
 										f.TxtIDUsuario.Text = DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value.ToString();
-
 
 										f.editando = true;
 										f.ShowDialog();
@@ -90,13 +86,18 @@ namespace COMPLETE_FLAT_UI
 										return;
 								}
 						}
+						DGVDatos.Focus();
 				}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 510b103 (VerProductos)
 				private void btnNuevo_Click(object sender, EventArgs e)
 				{
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
-								FrmUsuarios f = new FrmUsuarios();
-								f.ShowDialog();
+								FrmUsuarios formUsuarios = new FrmUsuarios();
+								formUsuarios.ShowDialog();
 								verUsuarios();
 						}
 						if (LblTitulo.Text == "Lista de Clientes")
@@ -105,6 +106,29 @@ namespace COMPLETE_FLAT_UI
 								f.ShowDialog();
 								verClientes();
 						}
+
+						if (LblTitulo.Text == "Lista de Productos")
+						{
+								var formProductos = new FrmProductos();
+								//llenamos el ComboBox con categorias
+								var categoias = FuncionesProdutos.TemGetCategorias();
+								if (categoias.Count < 0 || categoias == null)
+								{
+										formProductos.CbxCategoria.Items.Add("N/A");
+								}
+								else
+								{
+										foreach (var item in categoias)
+										{
+												formProductos.CbxCategoria.Items.Add(item);
+										}
+										
+								}
+								formProductos.ShowDialog();
+								verProductos();
+						}
+						//linea necesaria para evitar errores por perdida de focus
+						DGVDatos.Focus();
 				}
 
 				private void BtnEliminar_Click(object sender, EventArgs e)
@@ -145,6 +169,7 @@ namespace COMPLETE_FLAT_UI
 												MessageBoxButtons.OK, MessageBoxIcon.Error);
 										}
 										break;
+
 								case "Lista de Clientes":
 										verClientes();
 										break;
