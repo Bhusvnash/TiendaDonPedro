@@ -73,14 +73,22 @@ namespace COMPLETE_FLAT_UI
 						}
 						else if (LblTitulo.Text == "Lista de Clientes")
 						{
-								FrmClientes f = new FrmClientes();
-								f.editando = true;
+								try
+								{
+										FrmClientes f = new FrmClientes();
 
-								f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
-								f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
-								f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
+										f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
+										f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
+										f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
 
-								MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										f.editando = true;
+										f.ShowDialog();
+								}
+								catch
+								{
+										MessageBox.Show("Por favor seleccione un cliente para editar", "Selección de Cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										return;
+								}
 						}
 				}
 				private void btnNuevo_Click(object sender, EventArgs e)
