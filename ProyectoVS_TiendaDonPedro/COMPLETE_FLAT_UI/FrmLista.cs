@@ -48,25 +48,17 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Focus();
 						if (LblTitulo.Text == "Lista de Usuarios")
 						{
-								Usuario user = null;
 								try
 								{
-										//llenamos el obejo con lo que tenga selecionado el usuario
-										user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
-												DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString(),
-												DGVDatos.CurrentRow.Cells["NOMBRE_USUARIO"].Value.ToString(),
-												DGVDatos.CurrentRow.Cells["APELLIDO_USUARIO"].Value.ToString(),
-												DGVDatos.CurrentRow.Cells["PASSWORD_USUARIO"].Value.ToString(),
-												DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString());
 										//instancia del fromulario usuarios
 										FrmUsuarios f = new FrmUsuarios();
 										//llenamos los txt con la info del usuario que se quiere editar
-										f.TxtApellidos.Text = user.apellido_usuario;
-										f.TxtContraseña.Text = user.password_usuario;
-										f.TxtNombres.Text = user.nombre_usuario;
-										f.TxtUsuario.Text = user.alias_usuario;
-										f.CbxRol.Text = user.rol_usuario;
-										f.TxtIDUsuario.Text = user.id_usuario.ToString();
+										f.TxtApellidos.Text = DGVDatos.CurrentRow.Cells["APELLIDO_USUARIO"].Value.ToString();
+										f.TxtContraseña.Text = DGVDatos.CurrentRow.Cells["PASSWORD_USUARIO"].Value.ToString();
+										f.TxtNombres.Text = DGVDatos.CurrentRow.Cells["NOMBRE_USUARIO"].Value.ToString();
+										f.TxtUsuario.Text = DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString();
+										f.CbxRol.Text = DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString();
+										f.TxtIDUsuario.Text = DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value.ToString();
 
 
 										f.editando = true;
@@ -79,7 +71,6 @@ namespace COMPLETE_FLAT_UI
 								}
 								verUsuarios();
 						}
-<<<<<<< HEAD
 						else if (LblTitulo.Text == "Lista de Clientes")
 						{
 								FrmClientes f = new FrmClientes();
@@ -91,10 +82,6 @@ namespace COMPLETE_FLAT_UI
 
 								MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
-				}
-=======
->>>>>>> ae76b1c (no se we)
-
 				}
 				private void btnNuevo_Click(object sender, EventArgs e)
 				{
