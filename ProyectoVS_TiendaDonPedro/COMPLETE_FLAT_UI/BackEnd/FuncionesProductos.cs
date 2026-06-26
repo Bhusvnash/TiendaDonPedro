@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace COMPLETE_FLAT_UI
 {
-		internal class FuncionesProdutos
+		internal class FuncProductos
 		{
 				public static List<Producto> GetProductos()
 				{
@@ -18,15 +18,13 @@ namespace COMPLETE_FLAT_UI
 								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consulta = @"select * from tbl_categoria join tbl_producto on 
-										tbl_categoria.id_categoria = tbl_producto.id_categoria";
+										string consulta = @"select * from  tbl_producto";
 										var cmd = new MySqlCommand(consulta, conexion);
 										var lector = cmd.ExecuteReader();
 										while (lector.Read())
 										{
 												productos.Add(new Producto(
 														Convert.ToInt64(lector["id_producto"]),
-														lector["des_categoria"].ToString(),
 														lector["nombre_producto"].ToString(),
 														Convert.ToInt64(lector["precio_producto"]),
 														Convert.ToInt32(lector["stock_producto"]),
@@ -109,6 +107,7 @@ namespace COMPLETE_FLAT_UI
 						}
 				}
 
+
 				public static bool DeleteProducto(Producto producto)
 				{
 						try
@@ -129,5 +128,34 @@ namespace COMPLETE_FLAT_UI
 								return false;
 						}
 				}
+				//Esta funcion hay que eliminar cuando se Realice FuncCategorias 
+				public static List<string> TemGetCategorias()
+				{
+						//  select des_categoria  from tbl_categoria group by des_categoria;
+						try
+						{
+								List<string> categorias = new List<string>();
+								using(MySqlConnection  conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = " select des_categoria  from tbl_categoria group by des_categoria ";
+										using(MySqlCommand cmd = new MySqlCommand(consulta, conexion))
+										{
+												var reader = cmd.ExecuteReader();
+												while (reader.Read())
+												{
+														categorias.Add(reader["des_categoria"].ToString());
+												}
+												return categorias;
+										}
+								}
+						}
+						catch
+						{
+								return null;
+						}
+						
+				}
+
 		}
 }
