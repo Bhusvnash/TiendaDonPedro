@@ -89,6 +89,8 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Por favor seleccione un cliente para editar", "Selección de Cliente", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
+
+								verClientes();
 						}
 				}
 				private void btnNuevo_Click(object sender, EventArgs e)

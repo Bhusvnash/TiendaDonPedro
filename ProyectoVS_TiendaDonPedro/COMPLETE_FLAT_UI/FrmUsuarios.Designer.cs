@@ -65,7 +65,7 @@
             this.BarraTitulo.Controls.Add(this.LblTituloFormUsuarios);
             this.BarraTitulo.Controls.Add(this.BtnCerrar);
             this.BarraTitulo.Location = new System.Drawing.Point(0, -4);
-            this.BarraTitulo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BarraTitulo.Margin = new System.Windows.Forms.Padding(4);
             this.BarraTitulo.Name = "BarraTitulo";
             this.BarraTitulo.Size = new System.Drawing.Size(609, 47);
             this.BarraTitulo.TabIndex = 36;
@@ -78,7 +78,7 @@
             this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCerrar.Image = global::COMPLETE_FLAT_UI.Properties.Resources.Close;
             this.BtnCerrar.Location = new System.Drawing.Point(559, 0);
-            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnCerrar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnCerrar.Name = "BtnCerrar";
             this.BtnCerrar.Size = new System.Drawing.Size(51, 47);
             this.BtnCerrar.TabIndex = 4;
@@ -94,7 +94,7 @@
             this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnSalir.ForeColor = System.Drawing.Color.White;
             this.BtnSalir.Location = new System.Drawing.Point(336, 241);
-            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.BtnSalir.Name = "BtnSalir";
             this.BtnSalir.Size = new System.Drawing.Size(133, 43);
             this.BtnSalir.TabIndex = 46;
@@ -111,7 +111,7 @@
             this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnGuardar.ForeColor = System.Drawing.Color.White;
             this.BtnGuardar.Location = new System.Drawing.Point(164, 241);
-            this.BtnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(133, 43);
             this.BtnGuardar.TabIndex = 45;
@@ -125,7 +125,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtContraseña.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtContraseña.Location = new System.Drawing.Point(147, 156);
-            this.TxtContraseña.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtContraseña.Margin = new System.Windows.Forms.Padding(4);
             this.TxtContraseña.MaxLength = 100;
             this.TxtContraseña.Name = "TxtContraseña";
             this.TxtContraseña.PasswordChar = '*';
@@ -143,6 +143,7 @@
             this.label3.Size = new System.Drawing.Size(100, 20);
             this.label3.TabIndex = 44;
             this.label3.Text = "Contraseña:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // TxtUsuario
             // 
@@ -150,7 +151,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtUsuario.Location = new System.Drawing.Point(147, 48);
-            this.TxtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.TxtUsuario.MaxLength = 100;
             this.TxtUsuario.Name = "TxtUsuario";
             this.TxtUsuario.Size = new System.Drawing.Size(424, 26);
@@ -174,7 +175,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtNombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtNombres.Location = new System.Drawing.Point(147, 84);
-            this.TxtNombres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtNombres.Margin = new System.Windows.Forms.Padding(4);
             this.TxtNombres.MaxLength = 100;
             this.TxtNombres.Name = "TxtNombres";
             this.TxtNombres.Size = new System.Drawing.Size(424, 26);
@@ -184,51 +185,50 @@
             // 
             this.TxtApellidos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-
-						this.TxtApellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtApellidos.Location = new System.Drawing.Point(110, 98);
-						this.TxtApellidos.MaxLength = 100;
-						this.TxtApellidos.Name = "TxtApellidos";
-						this.TxtApellidos.Size = new System.Drawing.Size(319, 23);
-						this.TxtApellidos.TabIndex = 38;
-						// 
-						// label1
-						// 
-						this.label1.AutoSize = true;
-						this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.label1.ForeColor = System.Drawing.Color.LightGray;
-						this.label1.Location = new System.Drawing.Point(18, 101);
-						this.label1.Name = "label1";
-						this.label1.Size = new System.Drawing.Size(69, 17);
-						this.label1.TabIndex = 40;
-						this.label1.Text = "Apellidos:";
-						// 
-						// label2
-						// 
-						this.label2.AutoSize = true;
-						this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.label2.ForeColor = System.Drawing.Color.LightGray;
-						this.label2.Location = new System.Drawing.Point(18, 71);
-						this.label2.Name = "label2";
-						this.label2.Size = new System.Drawing.Size(69, 17);
-						this.label2.TabIndex = 39;
-						this.label2.Text = "Nombres:";
-						// 
-						// label4
-						// 
-						this.label4.AutoSize = true;
-						this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.label4.ForeColor = System.Drawing.Color.LightGray;
-						this.label4.Location = new System.Drawing.Point(18, 159);
-						this.label4.Name = "label4";
-						this.label4.Size = new System.Drawing.Size(33, 17);
-						this.label4.TabIndex = 48;
-						this.label4.Text = "Rol:";
-						// 
-						// CbxRol
-						// 
-						this.CbxRol.FormattingEnabled = true;
-						this.CbxRol.Items.AddRange(new object[] {
+            this.TxtApellidos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtApellidos.Location = new System.Drawing.Point(147, 117);
+            this.TxtApellidos.MaxLength = 100;
+            this.TxtApellidos.Name = "TxtApellidos";
+            this.TxtApellidos.Size = new System.Drawing.Size(319, 26);
+            this.TxtApellidos.TabIndex = 38;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.LightGray;
+            this.label1.Location = new System.Drawing.Point(55, 120);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 20);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Apellidos:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.LightGray;
+            this.label2.Location = new System.Drawing.Point(18, 71);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 20);
+            this.label2.TabIndex = 39;
+            this.label2.Text = "Nombres:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.LightGray;
+            this.label4.Location = new System.Drawing.Point(18, 159);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 20);
+            this.label4.TabIndex = 48;
+            this.label4.Text = "Rol:";
+            // 
+            // CbxRol
+            // 
+            this.CbxRol.FormattingEnabled = true;
+            this.CbxRol.Items.AddRange(new object[] {
             "Admin",
             "Cajero1",
             "Cajero2",
@@ -236,7 +236,7 @@
             "Cajero4",
             "Cajero5"});
             this.CbxRol.Location = new System.Drawing.Point(147, 194);
-            this.CbxRol.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CbxRol.Margin = new System.Windows.Forms.Padding(4);
             this.CbxRol.MaxLength = 100;
             this.CbxRol.Name = "CbxRol";
             this.CbxRol.Size = new System.Drawing.Size(425, 24);
@@ -248,7 +248,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtIDUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtIDUsuario.Location = new System.Drawing.Point(148, 298);
-            this.TxtIDUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TxtIDUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.TxtIDUsuario.MaxLength = 100;
             this.TxtIDUsuario.Name = "TxtIDUsuario";
             this.TxtIDUsuario.Size = new System.Drawing.Size(424, 26);
@@ -276,7 +276,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmUsuarios";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmUsuaios";

@@ -108,7 +108,7 @@ namespace COMPLETE_FLAT_UI
 						if (editando)
 						{
 								MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-								/*
+								
 								//preguntamos si quiera continuar con los datos que tiene
 								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtNombre.Text}, {TxtDireccion.Text}, {TxtCorreo.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 								if (result != DialogResult.Yes)
@@ -127,7 +127,7 @@ namespace COMPLETE_FLAT_UI
 										MessageBox.Show("Error: No se pudo actualizar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 										TxtNombre.Focus();
 								}
-								*/
+								
 						}
 						
 				}
