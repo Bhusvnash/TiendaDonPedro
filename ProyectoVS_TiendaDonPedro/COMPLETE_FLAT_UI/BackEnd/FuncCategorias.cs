@@ -97,10 +97,10 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								using(var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consula = @"Delete tbl_categoria where id_categoria = @id ";
+										string consula = @"Delete FROM tbl_categoria where id_categoria = @id";
 										using(var cmd = new MySqlCommand(consula, conexion))
 										{
-												cmd.Parameters.AddWithValue("@id", categoria.id_categoria);
+												 cmd.Parameters.AddWithValue("@id", categoria.id_categoria);
 												  int rows = cmd.ExecuteNonQuery();
 												return rows > 0;
 										}

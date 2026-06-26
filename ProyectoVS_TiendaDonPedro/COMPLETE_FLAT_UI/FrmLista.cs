@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -241,19 +242,32 @@ namespace COMPLETE_FLAT_UI
 										break;
 
 								case "Lista de Categorias":
-										//objeto de lo que este selecionando el usuario
+
 										try
 										{
+												//objeto de lo que este selecionando el usuario
 												Categoria categoria = new Categoria(
 												Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_categoria"].Value),
-												Convert.ToString(DGVDatos.CurrentRow.Cells["des_categoria"].Value)
-											);
-												if (FuncCategorias.DeleteCategoria(categoria))
-														MessageBox.Show("La categoria ha sido eliminada", "Info",
-														MessageBoxButtons.OK, MessageBoxIcon.Information);
+												Convert.ToString(DGVDatos.CurrentRow.Cells["des_categoria"].Value));
+												//preguntamos si quiere continuar con esos datos
+												DialogResult rpt = new DialogResult();
+												rpt = MessageBox.Show($"Desea Eliminar La Categoria: {categoria.des_categoria}?", "ELIMINAR",
+														MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+												if (rpt == DialogResult.Yes)
+												{
+														if (FuncCategorias.DeleteCategoria(categoria))
+																MessageBox.Show("La categoria ha sido eliminada", "Info",
+																MessageBoxButtons.OK, MessageBoxIcon.Information);
+														else
+																MessageBox.Show("La categoria No se pudo eliminar", "ERROR",
+																MessageBoxButtons.OK, MessageBoxIcon.Error);
+												}
 												else
-														MessageBox.Show("La categoria No se pudo eliminar", "ERROR",
-														MessageBoxButtons.OK, MessageBoxIcon.Error);
+												{
+														MessageBox.Show("Operacion Cancelada", "Cancelada", MessageBoxButtons.OK,
+																MessageBoxIcon.Information);
+												}
 										}
 										catch
 										{
@@ -262,7 +276,6 @@ namespace COMPLETE_FLAT_UI
 										}
 										VerCategorias();
 										break;
-
 								default:
 										break;
 						}
@@ -290,11 +303,9 @@ namespace COMPLETE_FLAT_UI
 						DGVDatos.Columns.Clear();
 						DGVDatos.DataSource = FuncProductos.GetProductos();
 						DGVDatos.ReadOnly = true;
-
 						// Ocultar columnas
 						DGVDatos.Columns["id_producto"].Visible = false;
 						DGVDatos.Columns["id_categoria"].Visible = false;
-
 						// Cambiar títulos
 						DGVDatos.Columns["nombre_producto"].HeaderText = "Producto";
 						DGVDatos.Columns["precio_producto"].HeaderText = "Precio";
