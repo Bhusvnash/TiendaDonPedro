@@ -116,7 +116,7 @@ namespace COMPLETE_FLAT_UI
 												formProducto.CbxCategoria.SelectedValue = objCategoria.des_categoria;
 												foreach (var item in categorias)
 												{
-														formProducto.CbxCategoria.Items.Add(item);
+														formProducto.CbxCategoria.Items.Add(item.des_categoria);
 												}
 										}
 										else
@@ -306,6 +306,12 @@ namespace COMPLETE_FLAT_UI
 										}
 										VerCategorias();
 										break;
+
+								case "Lista de Productos":
+										try { } catch { }
+										VerProductos();
+										break;
+
 								default:
 										break;
 						}

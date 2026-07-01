@@ -37,5 +37,12 @@ namespace COMPLETE_FLAT_UI
         {
 
         }
-    }
+
+		
+
+				private void textBox1_TextChanged(object sender, EventArgs e)
+				{
+
+				}
+		}
 }
