@@ -157,59 +157,6 @@
 						// 
 						this.TxtDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-<<<<<<< HEAD
-            this.TxtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TxtDireccion.Location = new System.Drawing.Point(147, 95);
-            this.TxtDireccion.Margin = new System.Windows.Forms.Padding(4);
-            this.TxtDireccion.Name = "TxtDireccion";
-            this.TxtDireccion.Size = new System.Drawing.Size(475, 26);
-            this.TxtDireccion.TabIndex = 27;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.LightGray;
-            this.label1.Location = new System.Drawing.Point(24, 98);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 20);
-            this.label1.TabIndex = 29;
-            this.label1.Text = "Direccion:";
-            // 
-            // id_cliente
-            // 
-            this.id_cliente.Location = new System.Drawing.Point(154, 291);
-            this.id_cliente.Name = "id_cliente";
-            this.id_cliente.Size = new System.Drawing.Size(468, 22);
-            this.id_cliente.TabIndex = 36;
-            // 
-            // FrmClientes
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
-            this.ClientSize = new System.Drawing.Size(674, 246);
-            this.Controls.Add(this.id_cliente);
-            this.Controls.Add(this.BtnSalir);
-            this.Controls.Add(this.BtnGuardar);
-            this.Controls.Add(this.TxtCorreo);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.TxtNombre);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.TxtDireccion);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.BarraTitulo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "FrmClientes";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "FrmClientes";
-            this.BarraTitulo.ResumeLayout(false);
-            this.BarraTitulo.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-=======
 						this.TxtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.TxtDireccion.Location = new System.Drawing.Point(110, 77);
 						this.TxtDireccion.Name = "TxtDireccion";
@@ -259,7 +206,6 @@
 						this.BarraTitulo.PerformLayout();
 						this.ResumeLayout(false);
 						this.PerformLayout();
->>>>>>> 57bb8ce (Update Productos)
 
         }
 

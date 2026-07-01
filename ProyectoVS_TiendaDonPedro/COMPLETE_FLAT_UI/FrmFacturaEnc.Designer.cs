@@ -37,7 +37,7 @@
 						this.label3 = new System.Windows.Forms.Label();
 						this.label5 = new System.Windows.Forms.Label();
 						this.TxtIdent = new System.Windows.Forms.TextBox();
-						this.TxtNombre = new System.Windows.Forms.TextBox();
+						this.TxtNombreCliente = new System.Windows.Forms.TextBox();
 						this.label1 = new System.Windows.Forms.Label();
 						this.label2 = new System.Windows.Forms.Label();
 						this.DGVDetalle = new System.Windows.Forms.DataGridView();
@@ -142,7 +142,7 @@
 						this.label3.AutoSize = true;
 						this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label3.ForeColor = System.Drawing.Color.LightGray;
-						this.label3.Location = new System.Drawing.Point(277, 77);
+						this.label3.Location = new System.Drawing.Point(177, 55);
 						this.label3.Name = "label3";
 						this.label3.Size = new System.Drawing.Size(135, 24);
 						this.label3.TabIndex = 44;
@@ -164,30 +164,30 @@
 						this.TxtIdent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 						this.TxtIdent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtIdent.Location = new System.Drawing.Point(288, 45);
+						this.TxtIdent.Location = new System.Drawing.Point(463, 81);
 						this.TxtIdent.Name = "TxtIdent";
-						this.TxtIdent.Size = new System.Drawing.Size(65, 23);
+						this.TxtIdent.Size = new System.Drawing.Size(10, 23);
 						this.TxtIdent.TabIndex = 37;
 						this.TxtIdent.TextChanged += new System.EventHandler(this.TxtIdent_TextChanged);
 						this.TxtIdent.Validated += new System.EventHandler(this.TxtIdent_Validated);
 						// 
-						// TxtNombre
+						// TxtNombreCliente
 						// 
-						this.TxtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+						this.TxtNombreCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-						this.TxtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtNombre.Location = new System.Drawing.Point(494, 46);
-						this.TxtNombre.Name = "TxtNombre";
-						this.TxtNombre.ReadOnly = true;
-						this.TxtNombre.Size = new System.Drawing.Size(120, 23);
-						this.TxtNombre.TabIndex = 38;
+						this.TxtNombreCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+						this.TxtNombreCliente.Location = new System.Drawing.Point(463, 52);
+						this.TxtNombreCliente.Name = "TxtNombreCliente";
+						this.TxtNombreCliente.ReadOnly = true;
+						this.TxtNombreCliente.Size = new System.Drawing.Size(103, 23);
+						this.TxtNombreCliente.TabIndex = 38;
 						// 
 						// label1
 						// 
 						this.label1.AutoSize = true;
 						this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label1.ForeColor = System.Drawing.Color.LightGray;
-						this.label1.Location = new System.Drawing.Point(430, 48);
+						this.label1.Location = new System.Drawing.Point(367, 54);
 						this.label1.Name = "label1";
 						this.label1.Size = new System.Drawing.Size(58, 17);
 						this.label1.TabIndex = 40;
@@ -198,7 +198,7 @@
 						this.label2.AutoSize = true;
 						this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label2.ForeColor = System.Drawing.Color.LightGray;
-						this.label2.Location = new System.Drawing.Point(190, 47);
+						this.label2.Location = new System.Drawing.Point(366, 81);
 						this.label2.Name = "label2";
 						this.label2.Size = new System.Drawing.Size(90, 17);
 						this.label2.TabIndex = 39;
@@ -285,6 +285,7 @@
 						this.BtnAddProd.TabIndex = 53;
 						this.BtnAddProd.Text = "Agregar Producto";
 						this.BtnAddProd.UseVisualStyleBackColor = false;
+						this.BtnAddProd.Click += new System.EventHandler(this.BtnAddProd_Click);
 						// 
 						// BtnDelProd
 						// 
@@ -315,6 +316,7 @@
 						this.BtnNuevo.TabIndex = 55;
 						this.BtnNuevo.Text = "Nuevo";
 						this.BtnNuevo.UseVisualStyleBackColor = false;
+						this.BtnNuevo.Click += new System.EventHandler(this.BtnNuevo_Click);
 						// 
 						// BtnCancelar
 						// 
@@ -394,13 +396,14 @@
 						this.TxtCantidad.Name = "TxtCantidad";
 						this.TxtCantidad.Size = new System.Drawing.Size(100, 20);
 						this.TxtCantidad.TabIndex = 62;
+						this.TxtCantidad.Enter += new System.EventHandler(this.TxtCantidad_Enter);
 						// 
 						// FrmFacturaEnc
 						// 
 						this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 						this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 						this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(69)))), ((int)(((byte)(76)))));
-						this.ClientSize = new System.Drawing.Size(707, 434);
+						this.ClientSize = new System.Drawing.Size(707, 470);
 						this.Controls.Add(this.label10);
 						this.Controls.Add(this.TxtCantidad);
 						this.Controls.Add(this.label9);
@@ -425,7 +428,7 @@
 						this.Controls.Add(this.label3);
 						this.Controls.Add(this.label5);
 						this.Controls.Add(this.TxtIdent);
-						this.Controls.Add(this.TxtNombre);
+						this.Controls.Add(this.TxtNombreCliente);
 						this.Controls.Add(this.label1);
 						this.Controls.Add(this.label2);
 						this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -450,8 +453,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox TxtIdent;
-        public System.Windows.Forms.TextBox TxtNombre;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox TxtNombreCliente;
+				private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView DGVDetalle;
         private System.Windows.Forms.Label label4;
