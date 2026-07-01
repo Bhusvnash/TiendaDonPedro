@@ -348,7 +348,7 @@ namespace COMPLETE_FLAT_UI
 						//limpiamos el Datas Grid View
 						//DGVDatos.Rows.Clear();
 						DGVDatos.Columns.Clear();
-						DGVDatos.DataSource = Func_Clientes.GetClientes();
+						DGVDatos.DataSource = Func_Clientes.GetClientes(0);
 						DGVDatos.ReadOnly = true;
 						DGVDatos.Columns["id_cliente"].Visible = false;
 						DGVDatos.Columns["nombre_cliente"].HeaderText = "Nombre";

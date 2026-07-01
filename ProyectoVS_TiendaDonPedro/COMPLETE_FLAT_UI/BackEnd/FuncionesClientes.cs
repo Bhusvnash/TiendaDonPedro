@@ -11,26 +11,34 @@ namespace COMPLETE_FLAT_UI.BackEnd
 {
 		internal class Func_Clientes
 		{
-				public static List<Cliente> GetClientes()
+				public static List<Cliente> GetClientes(int id =0)
 				{
 						List<Cliente> clientes = new List<Cliente>();
 						try
 						{
-								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								using (MySqlConnection conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consulta = "select * from  tbl_cliente limit 10";
-										var cmd = new MySqlCommand(consulta, conexion);
-										var lector = cmd.ExecuteReader();
+										string consulta = id == 0
+												? "select * from  tbl_cliente limit 10"
+												: "select * from tbl_cliente where id_cliente = @id";
 
-										while (lector.Read())
+										using (var sql = new MySqlCommand(consulta, conexion))
 										{
-												clientes.Add(new Cliente(Convert.ToInt64(lector["id_cliente"]),
-														lector["nombre_cliente"].ToString(),
-														lector["direccion_cliente"].ToString(),
-														lector["email_cliente"].ToString()));
-										}  
-										return clientes;
+												sql.Parameters.AddWithValue("@id", id);
+
+												var cmd = new MySqlCommand(consulta, conexion);
+												var lector = cmd.ExecuteReader();
+
+												while (lector.Read())
+												{
+														clientes.Add(new Cliente(Convert.ToInt64(lector["id_cliente"]),
+																lector["nombre_cliente"].ToString(),
+																lector["direccion_cliente"].ToString(),
+																lector["email_cliente"].ToString()));
+												}
+												return clientes;
+										}
 								}
 						}
 						catch
