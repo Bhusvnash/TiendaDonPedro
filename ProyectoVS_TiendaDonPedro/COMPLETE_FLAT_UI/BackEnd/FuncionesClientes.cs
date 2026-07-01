@@ -79,7 +79,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 										string consulta = @"UPDATE tbl_cliente
                                 SET nombre_cliente = @nombre,
                                     direccion_cliente = @direccion,
-                                    email_cliente = @correo,
+                                    email_cliente = @correo 
                                 WHERE id_cliente = @id";
 										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
@@ -90,6 +90,27 @@ namespace COMPLETE_FLAT_UI.BackEnd
 
 												int rpt = cmd.ExecuteNonQuery();
 												return rpt > 0;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
+
+				public static bool DeleteCliente(Cliente client)
+				{
+						try
+						{
+								using (MySqlConnection cnn = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										cnn.Open();
+										string consulta = @"Delete from  tbl_cliente where id_cliente = @id ";
+										using (var sql = new MySqlCommand(consulta, cnn))
+										{
+												sql.Parameters.AddWithValue("@id", client.id_cliente);
+												return 0 < sql.ExecuteNonQuery();
 										}
 								}
 						}

@@ -106,9 +106,7 @@ namespace COMPLETE_FLAT_UI
 						
 						//esta editando
 						if (editando)
-						{
-								MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-								
+						{								
 								//preguntamos si quiera continuar con los datos que tiene
 								DialogResult result = MessageBox.Show($"¿Desea continuar con los siguientes datos: {TxtNombre.Text}, {TxtDireccion.Text}, {TxtCorreo.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 								if (result != DialogResult.Yes)
@@ -120,7 +118,8 @@ namespace COMPLETE_FLAT_UI
 								if (Func_Clientes.UpdateCliente(cliente))
 								{
 										MessageBox.Show("Usuario actualizado", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-										TxtNombre.Clear(); TxtDireccion.Clear(); TxtCorreo.Clear();;
+										TxtNombre.Clear(); TxtDireccion.Clear(); TxtCorreo.Clear();
+										return;
 								}
 								else
 								{

@@ -82,6 +82,7 @@ namespace COMPLETE_FLAT_UI
 										f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
 										f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
 										f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
+										f.id_cliente.Text = DGVDatos.CurrentRow.Cells["id_cliente"].Value.ToString();
 										f.editando = true;
 										f.ShowDialog();
 										verClientes();
@@ -219,7 +220,7 @@ namespace COMPLETE_FLAT_UI
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["apellido_usuario"].Value),
 																								null,
 																								Convert.ToString(DGVDatos.CurrentRow.Cells["rol_usuario"].Value));
-												var rpt = MessageBox.Show($"Desea eliminar ha : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+												var rpt = MessageBox.Show($"Desea eliminar a : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 												if (rpt != DialogResult.Yes) break;
 												if (FuncUsuarios.DeleteUsuario(user))
 														MessageBox.Show("El usuario ha sido eliminado", "Info",
@@ -240,7 +241,34 @@ namespace COMPLETE_FLAT_UI
 										#endregion EliminarUsuario
 
 								case "Lista de Clientes":
-										verClientes();
+										if (DGVDatos.CurrentRow == null)
+										{
+												MessageBox.Show("Seleccione un cliente para eliminar.", "Alerta",
+														MessageBoxButtons.OK, MessageBoxIcon.Warning);
+												return;
+										}
+
+										try
+										{
+												var client = new Cliente(Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_cliente"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_cliente"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["direccion_cliente"].Value),
+																								Convert.ToString(DGVDatos.CurrentRow.Cells["email_cliente"].Value));
+												var rpt = MessageBox.Show($"Desea eliminar a : {client.nombre_cliente}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+												if (rpt != DialogResult.Yes) break;
+												if (Func_Clientes.DeleteCliente(client))
+														MessageBox.Show("El cliente ha sido eliminado", "Info",
+														MessageBoxButtons.OK, MessageBoxIcon.Information);
+												else
+														MessageBox.Show("El cliente No se pudo eliminar", "ERROR",
+														MessageBoxButtons.OK, MessageBoxIcon.Error);
+												verClientes();
+										}
+										catch (Exception ex)
+										{
+												MessageBox.Show($"Error al eliminar el cliente: {ex.Message}", "Error",
+												MessageBoxButtons.OK, MessageBoxIcon.Error);
+										}
 										break;
 
 								case "Lista de Categorias":
