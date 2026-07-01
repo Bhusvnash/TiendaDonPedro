@@ -125,6 +125,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackEnd\DIANapi.cs" />
     <Compile Include="BackEnd\FuncCategorias.cs" />
     <Compile Include="BackEnd\FuncionesClientes.cs" />
     <Compile Include="BackEnd\FuncionesProductos.cs" />
