@@ -11,7 +11,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 {
 		internal class Func_Clientes
 		{
-				public static List<Cliente> GetClientes(int id =0)
+				public static List<Cliente> GetClientes(long idBucaqueda)
 				{
 						List<Cliente> clientes = new List<Cliente>();
 						try
@@ -19,13 +19,16 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								using (MySqlConnection conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consulta = id == 0
+										string consulta = idBucaqueda == 0
 												? "select * from  tbl_cliente limit 10"
 												: "select * from tbl_cliente where id_cliente = @id";
 
 										using (var sql = new MySqlCommand(consulta, conexion))
 										{
-												sql.Parameters.AddWithValue("@id", id);
+												if(idBucaqueda != 0)
+												{
+														sql.Parameters.AddWithValue("@id", idBucaqueda);
+												}
 
 												var cmd = new MySqlCommand(consulta, conexion);
 												var lector = cmd.ExecuteReader();

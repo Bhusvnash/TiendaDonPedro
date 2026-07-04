@@ -128,10 +128,12 @@
     <Compile Include="BackEnd\DIANapi.cs" />
     <Compile Include="BackEnd\FuncCategorias.cs" />
     <Compile Include="BackEnd\FuncionesClientes.cs" />
+    <Compile Include="BackEnd\funcionesFactura.cs" />
     <Compile Include="BackEnd\FuncionesProductos.cs" />
     <Compile Include="BackEnd\FuncionesUsuarios.cs" />
     <Compile Include="BackEnd\modelos\ObjetoCategoria.cs" />
     <Compile Include="BackEnd\modelos\ObjetoCliente.cs" />
+    <Compile Include="BackEnd\modelos\ObjetoFactura.cs" />
     <Compile Include="BackEnd\modelos\ObjetoProducto.cs" />
     <Compile Include="FrmCategorias.cs">
       <SubType>Form</SubType>

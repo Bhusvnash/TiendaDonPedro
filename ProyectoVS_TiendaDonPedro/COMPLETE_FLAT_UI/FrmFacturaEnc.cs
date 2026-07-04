@@ -11,84 +11,75 @@ using System.Windows.Forms;
 
 namespace COMPLETE_FLAT_UI
 {
-    public partial class FrmFacturaEnc : Form
-    {
-				List<Producto> productos = FuncProductos.GetProductos();
-				Cliente cliente;
-				
-			
+		public partial class FrmFacturaEnc : Form
+		{
+				private List<Producto> productos = FuncProductos.GetProductos();
+				private dynamic cliente = null;
+
 				public FrmFacturaEnc()
-        {
-            InitializeComponent();
-			BtnGuardar.Enabled = false;
-			BtnCancelar.Enabled = false;
-			BtnSalir.Enabled = true;
-			BtnNuevo.Enabled = true;
-			BtnAddProd.Enabled = false;
-			BtnDelProd.Enabled = false;
-			
+				{
+						InitializeComponent();
+						BtnGuardar.Enabled = false;
+						BtnCancelar.Enabled = false;
+						BtnSalir.Enabled = true;
+						BtnNuevo.Enabled = true;
+						BtnAddProd.Enabled = false;
+						BtnDelProd.Enabled = false;
 				}
 
-        private void BtnSalir_Click(object sender, EventArgs e)
-        {
+				private void BtnSalir_Click(object sender, EventArgs e)
+				{
+				}
 
-        }
+				private void TxtIdent_TextChanged(object sender, EventArgs e)
+				{
+				}
 
-        private void TxtIdent_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+				private void TxtIdent_Validated(object sender, EventArgs e)
+				{
+				}
 
-        private void TxtIdent_Validated(object sender, EventArgs e)
-        {
-            
-           
-        }
-
-        private void BtnGuardar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-		
+				private void BtnGuardar_Click(object sender, EventArgs e)
+				{
+				}
 
 				private void textBox1_TextChanged(object sender, EventArgs e)
 				{
-
 				}
 
 				private void BtnAddProd_Click(object sender, EventArgs e)
 				{
-					
 				}
 
 				private void BtnNuevo_Click(object sender, EventArgs e)
 				{
-					if (TxtIdent.Text == "")
-					{
-						MessageBox.Show("Debe ingresar un numero de identificacion","Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-						return;
-					}
+						if (TxtIdent.Text == "")
+						{
+								MessageBox.Show("Debe ingresar un numero de identificacion", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								return;
+						}
 
-					TxtIdent.Enabled = false;
-					TxtNombreCliente.Enabled = false;
-					TxtIdent.Enabled = false;
-					TxtNombreCliente.Enabled = false;
-					BtnSalir.Enabled = false;			
-					//habilitamos los btns 
-					BtnGuardar.Enabled = true;
-					BtnCancelar.Enabled = true;
-					BtnAddProd.Enabled = true;
-					BtnDelProd.Enabled = true;
-			
+						TxtIdent.Enabled = false;
+						TxtNombreCliente.Enabled = false;
+						TxtIdent.Enabled = false;
+						TxtNombreCliente.Enabled = false;
+						BtnSalir.Enabled = false;
+						//habilitamos los btns
+						BtnGuardar.Enabled = true;
+						BtnCancelar.Enabled = true;
+						BtnAddProd.Enabled = true;
+						BtnDelProd.Enabled = true;
 
 						CbxProductos.Items.Clear();
 						foreach (var item in productos)
 						{
 								CbxProductos.Items.Add(item.nombre_producto);
 						}
-						//Convert.ToInt64(TxtIdent.Text)
-						cliente = Func_Clientes.GetClientes().FirstOrDefault();
+						//
+						long id = Convert.ToInt64(TxtIdent.Text);
+						var c = Func_Clientes.GetClientes(id);
+						cliente = c.FirstOrDefault();
+
 						TxtNombreCliente.Text = cliente.nombre_cliente;
 				}
 
@@ -99,6 +90,5 @@ namespace COMPLETE_FLAT_UI
 						=> item.nombre_producto
 						== productoSeleccionado)?.precio_producto.ToString();
 				}
-
 		}
 }
