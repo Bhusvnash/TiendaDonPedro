@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace COMPLETE_FLAT_UI.BackEnd
+namespace COMPLETE_FLAT_UI
 {
 		internal class funcionesFactura
 		{
@@ -24,7 +24,6 @@ namespace COMPLETE_FLAT_UI.BackEnd
 									   values  (@fecha, @id_cliente, @total, @estado)";
 										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
-
 												cmd.Parameters.AddWithValue("@fecha", factura.fecha_factura);
 												cmd.Parameters.AddWithValue("@id_cliente", factura.id_cliente);
 												cmd.Parameters.AddWithValue("@total", factura.total_factura);
@@ -37,6 +36,35 @@ namespace COMPLETE_FLAT_UI.BackEnd
 						catch
 						{
 								return false;
+						}
+				}
+
+				public static long GetMAxId()
+				{
+						try
+						{
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = @"SELECT MAX(id_factura) FROM tbl_facturaventa";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												var result = cmd.ExecuteScalar();
+												if (result != DBNull.Value)
+												{
+														return Convert.ToInt64(result)+1;
+												}
+												else
+												{
+														return 1; // No hay registros en la tabla
+												}
+										}
+								}
+						}
+						catch (Exception ex)
+						{
+								Console.WriteLine("Error al obtener el máximo ID de factura: " + ex.Message);
+								return 0; // En caso de error, se devuelve 0
 						}
 				}
 		}

@@ -49,25 +49,24 @@ namespace COMPLETE_FLAT_UI
 						{
 								#region EditarUsuario
 
-								try
-								{
-										//instancia del fromulario usuarios
-										FrmUsuarios f = new FrmUsuarios();
-										//llenamos los txt con la info del usuario que se quiere editar
-										f.TxtApellidos.Text = DGVDatos.CurrentRow.Cells["APELLIDO_USUARIO"].Value.ToString();
-										f.TxtContraseña.Text = DGVDatos.CurrentRow.Cells["PASSWORD_USUARIO"].Value.ToString();
-										f.TxtNombres.Text = DGVDatos.CurrentRow.Cells["NOMBRE_USUARIO"].Value.ToString();
-										f.TxtUsuario.Text = DGVDatos.CurrentRow.Cells["ALIAS_USUARIO"].Value.ToString();
-										f.CbxRol.Text = DGVDatos.CurrentRow.Cells["ROL_USUARIO"].Value.ToString();
-										f.TxtIDUsuario.Text = DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value.ToString();
-										f.editando = true;
-										f.ShowDialog();
-								}
-								catch
+								// Obtenemos el objeto Usuario vinculado a la fila seleccionada
+								var usuarioSeleccionado = DGVDatos.CurrentRow?.DataBoundItem as Usuario;
+								if (usuarioSeleccionado == null)
 								{
 										MessageBox.Show("Por favor seleccione un usuario para editar", "Selección de Usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
+
+								// Llenamos el formulario con las propiedades del objeto directamente
+								FrmUsuarios f = new FrmUsuarios();
+								f.TxtApellidos.Text = usuarioSeleccionado.apellido_usuario;
+								f.TxtContraseña.Text = usuarioSeleccionado.password_usuario;
+								f.TxtNombres.Text = usuarioSeleccionado.nombre_usuario;
+								f.TxtUsuario.Text = usuarioSeleccionado.alias_usuario;
+								f.CbxRol.Text = usuarioSeleccionado.rol_usuario;
+								f.TxtIDUsuario.Text = usuarioSeleccionado.id_usuario.ToString();
+								f.editando = true;
+								f.ShowDialog();
 								VerUsuarios();
 
 								#endregion EditarUsuario
@@ -75,25 +74,22 @@ namespace COMPLETE_FLAT_UI
 
 						if (LblTitulo.Text == "Lista de Clientes")
 						{
-								try
-								{
-										FrmClientes f = new FrmClientes();
-
-										f.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_cliente"].Value.ToString();
-										f.TxtDireccion.Text = DGVDatos.CurrentRow.Cells["direccion_cliente"].Value.ToString();
-										f.TxtCorreo.Text = DGVDatos.CurrentRow.Cells["email_cliente"].Value.ToString();
-										f.id_cliente.Text = DGVDatos.CurrentRow.Cells["id_cliente"].Value.ToString();
-										f.editando = true;
-										f.ShowDialog();
-										verClientes();
-								}
-								catch
+								// Obtenemos el objeto Cliente vinculado a la fila seleccionada
+								var clienteSeleccionado = DGVDatos.CurrentRow?.DataBoundItem as Cliente;
+								if (clienteSeleccionado == null)
 								{
 										MessageBox.Show("Por favor seleccione un cliente para editar", "Selección de Cliente",
 												MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
 
+								FrmClientes f = new FrmClientes();
+								f.TxtNombre.Text = clienteSeleccionado.nombre_cliente;
+								f.TxtDireccion.Text = clienteSeleccionado.direccion_cliente;
+								f.TxtCorreo.Text = clienteSeleccionado.email_cliente;
+								f.id_cliente.Text = clienteSeleccionado.id_cliente.ToString();
+								f.editando = true;
+								f.ShowDialog();
 								verClientes();
 						}
 
@@ -101,42 +97,38 @@ namespace COMPLETE_FLAT_UI
 						{
 								#region EditarProducto
 
-								try
-								{
-										FrmProductos formProducto = new FrmProductos();
-										//id_categoria
-										long idCategoria = Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString());
-										var categorias = FuncCategorias.GetCategorias();
-										//any = existe elementos => true/false
-										// el ? dice : aplicar lo lo siguiente solo si no es null
-
-										if (categorias?.Any() == true || categorias != null)
-										{
-												var objCategoria = categorias.FirstOrDefault(item => item.id_categoria == idCategoria);
-												formProducto.CbxCategoria.SelectedValue = objCategoria.des_categoria;
-												foreach (var item in categorias)
-												{
-														formProducto.CbxCategoria.Items.Add(item.des_categoria);
-												}
-										}
-										else
-										{
-												formProducto.CbxCategoria.Items.Add("N/A");
-										}
-										formProducto.TxtNombre.Text = DGVDatos.CurrentRow.Cells["nombre_producto"].Value.ToString();
-										formProducto.TxtPrecio.Text = DGVDatos.CurrentRow.Cells["precio_producto"].Value.ToString();
-										formProducto.TxtStock.Text = DGVDatos.CurrentRow.Cells["stock_producto"].Value.ToString();
-										formProducto.CbxCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
-										formProducto.TxtIVA.Text = DGVDatos.CurrentRow.Cells["iva_producto"].Value.ToString();
-										formProducto.editando = true;
-										formProducto.ShowDialog();
-										VerProductos();
-								}
-								catch
+								// Obtenemos el objeto Producto vinculado a la fila seleccionada
+								var productoSeleccionado = DGVDatos.CurrentRow?.DataBoundItem as Producto;
+								if (productoSeleccionado == null)
 								{
 										MessageBox.Show("Por favor seleccione un producto para editar", "Selección de Producto", MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
+
+								FrmProductos formProducto = new FrmProductos();
+								var categorias = FuncCategorias.GetCategorias();
+								// any = existe elementos => true/false
+								// el ? dice: aplicar lo siguiente solo si no es null
+								if (categorias?.Any() == true || categorias != null)
+								{
+										var objCategoria = categorias.FirstOrDefault(item => item.id_categoria == productoSeleccionado.id_categoria);
+										formProducto.CbxCategoria.SelectedValue = objCategoria?.des_categoria;
+										foreach (var item in categorias)
+												formProducto.CbxCategoria.Items.Add(item.des_categoria);
+								}
+								else
+								{
+										formProducto.CbxCategoria.Items.Add("N/A");
+								}
+
+								formProducto.TxtNombre.Text = productoSeleccionado.nombre_producto;
+								formProducto.TxtPrecio.Text = productoSeleccionado.precio_producto.ToString();
+								formProducto.TxtStock.Text = productoSeleccionado.stock_producto.ToString();
+								formProducto.CbxCategoria.Text = productoSeleccionado.id_categoria.ToString();
+								formProducto.TxtIVA.Text = productoSeleccionado.iva_producto.ToString();
+								formProducto.editando = true;
+								formProducto.ShowDialog();
+								VerProductos();
 
 								#endregion EditarProducto
 						}
@@ -145,9 +137,17 @@ namespace COMPLETE_FLAT_UI
 						{
 								#region EditarCategorias
 
+								// Obtenemos el objeto Categoria vinculado a la fila seleccionada
+								var categoriaSeleccionada = DGVDatos.CurrentRow?.DataBoundItem as Categoria;
+								if (categoriaSeleccionada == null)
+								{
+										MessageBox.Show("Por favor seleccione una categoría para editar", "Selección de Categoría", MessageBoxButtons.OK, MessageBoxIcon.Information);
+										return;
+								}
+
 								var fmCategorias = new FrmCategorias();
-								fmCategorias.TxtDescripcion.Text = DGVDatos.CurrentRow.Cells["des_categoria"].Value.ToString();
-								fmCategorias.TxtIDCategoria.Text = DGVDatos.CurrentRow.Cells["id_categoria"].Value.ToString();
+								fmCategorias.TxtDescripcion.Text = categoriaSeleccionada.des_categoria;
+								fmCategorias.TxtIDCategoria.Text = categoriaSeleccionada.id_categoria.ToString();
 								fmCategorias.editando = true;
 								fmCategorias.ShowDialog();
 								VerCategorias();
@@ -212,14 +212,12 @@ namespace COMPLETE_FLAT_UI
 												return;
 										}
 
+										// Obtenemos el objeto Usuario vinculado a la fila seleccionada
+										var user = DGVDatos.CurrentRow?.DataBoundItem as Usuario;
+										if (user == null) break;
+
 										try
 										{
-												var user = new Usuario(Convert.ToInt64(DGVDatos.CurrentRow.Cells["ID_USUARIO"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["alias_usuario"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_usuario"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["apellido_usuario"].Value),
-																								null,
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["rol_usuario"].Value));
 												var rpt = MessageBox.Show($"Desea eliminar a : {user.nombre_usuario} {user.apellido_usuario}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 												if (rpt != DialogResult.Yes) break;
 												if (FuncUsuarios.DeleteUsuario(user))
@@ -228,7 +226,6 @@ namespace COMPLETE_FLAT_UI
 												else
 														MessageBox.Show("El usuario No se pudo eliminar", "ERROR",
 														MessageBoxButtons.OK, MessageBoxIcon.Error);
-												//
 												VerUsuarios();
 										}
 										catch (Exception ex)
@@ -248,12 +245,12 @@ namespace COMPLETE_FLAT_UI
 												return;
 										}
 
+										// Obtenemos el objeto Cliente vinculado a la fila seleccionada
+										var client = DGVDatos.CurrentRow?.DataBoundItem as Cliente;
+										if (client == null) break;
+
 										try
 										{
-												var client = new Cliente(Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_cliente"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["nombre_cliente"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["direccion_cliente"].Value),
-																								Convert.ToString(DGVDatos.CurrentRow.Cells["email_cliente"].Value));
 												var rpt = MessageBox.Show($"Desea eliminar a : {client.nombre_cliente}?", "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 												if (rpt != DialogResult.Yes) break;
 												if (Func_Clientes.DeleteCliente(client))
@@ -275,10 +272,9 @@ namespace COMPLETE_FLAT_UI
 
 										try
 										{
-												//objeto de lo que este selecionando el usuario
-												Categoria categoria = new Categoria(
-												Convert.ToInt64(DGVDatos.CurrentRow.Cells["id_categoria"].Value),
-												Convert.ToString(DGVDatos.CurrentRow.Cells["des_categoria"].Value));
+												// Obtenemos el objeto Categoria vinculado a la fila seleccionada
+												Categoria categoria = DGVDatos.CurrentRow?.DataBoundItem as Categoria;
+												if (categoria == null) break;
 												//preguntamos si quiere continuar con esos datos
 												DialogResult rpt = new DialogResult();
 												rpt = MessageBox.Show($"Desea Eliminar La Categoria: {categoria.des_categoria}?", "ELIMINAR",

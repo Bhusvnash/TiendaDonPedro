@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+						System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFacturaEnc));
 						this.BarraTitulo = new System.Windows.Forms.Panel();
 						this.LblTituloFormCliente = new System.Windows.Forms.Label();
 						this.BtnCerrar = new System.Windows.Forms.Button();
@@ -88,7 +89,7 @@
 						this.BtnCerrar.Cursor = System.Windows.Forms.Cursors.Hand;
 						this.BtnCerrar.FlatAppearance.BorderSize = 0;
 						this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-						this.BtnCerrar.Image = global::COMPLETE_FLAT_UI.Properties.Resources.Close;
+						this.BtnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("BtnCerrar.Image")));
 						this.BtnCerrar.Location = new System.Drawing.Point(666, 0);
 						this.BtnCerrar.Name = "BtnCerrar";
 						this.BtnCerrar.Size = new System.Drawing.Size(38, 38);
@@ -103,9 +104,9 @@
 						this.BtnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 						this.BtnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.BtnSalir.ForeColor = System.Drawing.Color.White;
-						this.BtnSalir.Location = new System.Drawing.Point(356, 384);
+						this.BtnSalir.Location = new System.Drawing.Point(356, 372);
 						this.BtnSalir.Name = "BtnSalir";
-						this.BtnSalir.Size = new System.Drawing.Size(100, 35);
+						this.BtnSalir.Size = new System.Drawing.Size(69, 35);
 						this.BtnSalir.TabIndex = 46;
 						this.BtnSalir.Text = "Salir";
 						this.BtnSalir.UseVisualStyleBackColor = false;
@@ -119,7 +120,7 @@
 						this.BtnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 						this.BtnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.BtnGuardar.ForeColor = System.Drawing.Color.White;
-						this.BtnGuardar.Location = new System.Drawing.Point(131, 384);
+						this.BtnGuardar.Location = new System.Drawing.Point(131, 372);
 						this.BtnGuardar.Name = "BtnGuardar";
 						this.BtnGuardar.Size = new System.Drawing.Size(100, 35);
 						this.BtnGuardar.TabIndex = 45;
@@ -132,7 +133,7 @@
 						this.TxtSubTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 						this.TxtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtSubTotal.Location = new System.Drawing.Point(554, 302);
+						this.TxtSubTotal.Location = new System.Drawing.Point(554, 294);
 						this.TxtSubTotal.Name = "TxtSubTotal";
 						this.TxtSubTotal.Size = new System.Drawing.Size(125, 23);
 						this.TxtSubTotal.TabIndex = 43;
@@ -223,7 +224,7 @@
 						this.label4.AutoSize = true;
 						this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label4.ForeColor = System.Drawing.Color.LightGray;
-						this.label4.Location = new System.Drawing.Point(486, 304);
+						this.label4.Location = new System.Drawing.Point(486, 296);
 						this.label4.Name = "label4";
 						this.label4.Size = new System.Drawing.Size(60, 17);
 						this.label4.TabIndex = 48;
@@ -234,7 +235,7 @@
 						this.label6.AutoSize = true;
 						this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label6.ForeColor = System.Drawing.Color.LightGray;
-						this.label6.Location = new System.Drawing.Point(512, 334);
+						this.label6.Location = new System.Drawing.Point(512, 326);
 						this.label6.Name = "label6";
 						this.label6.Size = new System.Drawing.Size(29, 17);
 						this.label6.TabIndex = 50;
@@ -245,7 +246,7 @@
 						this.TxtIVA.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 						this.TxtIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtIVA.Location = new System.Drawing.Point(554, 330);
+						this.TxtIVA.Location = new System.Drawing.Point(554, 322);
 						this.TxtIVA.Name = "TxtIVA";
 						this.TxtIVA.Size = new System.Drawing.Size(125, 23);
 						this.TxtIVA.TabIndex = 49;
@@ -255,7 +256,7 @@
 						this.label7.AutoSize = true;
 						this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label7.ForeColor = System.Drawing.Color.LightGray;
-						this.label7.Location = new System.Drawing.Point(451, 360);
+						this.label7.Location = new System.Drawing.Point(451, 352);
 						this.label7.Name = "label7";
 						this.label7.Size = new System.Drawing.Size(94, 17);
 						this.label7.TabIndex = 52;
@@ -266,7 +267,7 @@
 						this.TxtTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 						this.TxtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-						this.TxtTotal.Location = new System.Drawing.Point(554, 357);
+						this.TxtTotal.Location = new System.Drawing.Point(554, 349);
 						this.TxtTotal.Name = "TxtTotal";
 						this.TxtTotal.Size = new System.Drawing.Size(125, 23);
 						this.TxtTotal.TabIndex = 51;
@@ -301,6 +302,7 @@
 						this.BtnDelProd.TabIndex = 54;
 						this.BtnDelProd.Text = "Eliminar Producto";
 						this.BtnDelProd.UseVisualStyleBackColor = false;
+						this.BtnDelProd.Click += new System.EventHandler(this.BtnDelProd_Click);
 						// 
 						// BtnNuevo
 						// 
@@ -310,7 +312,7 @@
 						this.BtnNuevo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 						this.BtnNuevo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.BtnNuevo.ForeColor = System.Drawing.Color.White;
-						this.BtnNuevo.Location = new System.Drawing.Point(20, 384);
+						this.BtnNuevo.Location = new System.Drawing.Point(20, 372);
 						this.BtnNuevo.Name = "BtnNuevo";
 						this.BtnNuevo.Size = new System.Drawing.Size(100, 35);
 						this.BtnNuevo.TabIndex = 55;
@@ -326,12 +328,13 @@
 						this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 						this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.BtnCancelar.ForeColor = System.Drawing.Color.White;
-						this.BtnCancelar.Location = new System.Drawing.Point(241, 384);
+						this.BtnCancelar.Location = new System.Drawing.Point(241, 372);
 						this.BtnCancelar.Name = "BtnCancelar";
 						this.BtnCancelar.Size = new System.Drawing.Size(100, 35);
 						this.BtnCancelar.TabIndex = 56;
 						this.BtnCancelar.Text = "Cancelar";
 						this.BtnCancelar.UseVisualStyleBackColor = false;
+						this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
 						// 
 						// DTPFecha
 						// 
@@ -363,9 +366,9 @@
 						// 
 						// TxtPrecioProducto
 						// 
-						this.TxtPrecioProducto.Location = new System.Drawing.Point(325, 265);
+						this.TxtPrecioProducto.Location = new System.Drawing.Point(554, 264);
 						this.TxtPrecioProducto.Name = "TxtPrecioProducto";
-						this.TxtPrecioProducto.Size = new System.Drawing.Size(100, 20);
+						this.TxtPrecioProducto.Size = new System.Drawing.Size(125, 20);
 						this.TxtPrecioProducto.TabIndex = 60;
 						// 
 						// label9
@@ -373,7 +376,7 @@
 						this.label9.AutoSize = true;
 						this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label9.ForeColor = System.Drawing.Color.LightGray;
-						this.label9.Location = new System.Drawing.Point(247, 267);
+						this.label9.Location = new System.Drawing.Point(476, 266);
 						this.label9.Name = "label9";
 						this.label9.Size = new System.Drawing.Size(73, 17);
 						this.label9.TabIndex = 61;
@@ -384,7 +387,7 @@
 						this.label10.AutoSize = true;
 						this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.label10.ForeColor = System.Drawing.Color.LightGray;
-						this.label10.Location = new System.Drawing.Point(436, 265);
+						this.label10.Location = new System.Drawing.Point(247, 268);
 						this.label10.Name = "label10";
 						this.label10.Size = new System.Drawing.Size(64, 17);
 						this.label10.TabIndex = 63;
@@ -392,7 +395,7 @@
 						// 
 						// TxtCantidad
 						// 
-						this.TxtCantidad.Location = new System.Drawing.Point(514, 264);
+						this.TxtCantidad.Location = new System.Drawing.Point(325, 267);
 						this.TxtCantidad.Name = "TxtCantidad";
 						this.TxtCantidad.Size = new System.Drawing.Size(100, 20);
 						this.TxtCantidad.TabIndex = 62;

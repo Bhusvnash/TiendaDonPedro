@@ -57,7 +57,7 @@ namespace COMPLETE_FLAT_UI
 								TxtUsuario.Focus();
 								return;
 						}
-						var user = FuncLogin.InicialSesion(TxtUsuario.Text.Trim());
+						var user = FuncLogin.IniciarSesion(TxtUsuario.Text.Trim());
 						if (user == null)
 						{
 								MessageBox.Show("Usuario no encontrado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Error);

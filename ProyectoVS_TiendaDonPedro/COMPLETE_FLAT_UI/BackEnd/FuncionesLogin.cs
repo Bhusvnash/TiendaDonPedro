@@ -13,8 +13,7 @@ namespace COMPLETE_FLAT_UI
 				 Variable global para comunicar los forms y saber el roll
 				 */
 				public static Usuario Sesion;
-
-				public static Usuario InicialSesion(string alias)
+				public static Usuario IniciarSesion(string alias)
 				{
 						try
 						{

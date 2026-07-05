@@ -7,11 +7,11 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
-namespace COMPLETE_FLAT_UI.BackEnd
+namespace COMPLETE_FLAT_UI
 {
 		internal class Func_Clientes
 		{
-				public static List<Cliente> GetClientes(long idBucaqueda)
+				public static List<Cliente> GetClientes(long idBusqueda = 0)
 				{
 						List<Cliente> clientes = new List<Cliente>();
 						try
@@ -19,18 +19,15 @@ namespace COMPLETE_FLAT_UI.BackEnd
 								using (MySqlConnection conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 								{
 										conexion.Open();
-										string consulta = idBucaqueda == 0
+										string consulta = idBusqueda == 0
 												? "select * from  tbl_cliente limit 10"
 												: "select * from tbl_cliente where id_cliente = @id";
-
-										using (var sql = new MySqlCommand(consulta, conexion))
+										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
-												if(idBucaqueda != 0)
+												if (idBusqueda != 0)
 												{
-														sql.Parameters.AddWithValue("@id", idBucaqueda);
+														cmd.Parameters.AddWithValue("@id", idBusqueda);
 												}
-
-												var cmd = new MySqlCommand(consulta, conexion);
 												var lector = cmd.ExecuteReader();
 
 												while (lector.Read())
@@ -50,7 +47,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 						}
 				}
 
-				public static bool NewCliente(Cliente user)
+				public static bool NewCliente(Cliente cliente)
 				{
 						using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
 						{
@@ -66,9 +63,9 @@ namespace COMPLETE_FLAT_UI.BackEnd
 
 										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
-												cmd.Parameters.AddWithValue("@NombreCliente", user.nombre_cliente);
-												cmd.Parameters.AddWithValue("@DireccionCliente", user.direccion_cliente);
-												cmd.Parameters.AddWithValue("@EmailCliente", user.email_cliente);
+												cmd.Parameters.AddWithValue("@NombreCliente", cliente.nombre_cliente);
+												cmd.Parameters.AddWithValue("@DireccionCliente", cliente.direccion_cliente);
+												cmd.Parameters.AddWithValue("@EmailCliente", cliente.email_cliente);
 												int response = cmd.ExecuteNonQuery();
 												return response > 0;
 										}
@@ -90,7 +87,7 @@ namespace COMPLETE_FLAT_UI.BackEnd
 										string consulta = @"UPDATE tbl_cliente
                                 SET nombre_cliente = @nombre,
                                     direccion_cliente = @direccion,
-                                    email_cliente = @correo 
+                                    email_cliente = @correo
                                 WHERE id_cliente = @id";
 										using (var cmd = new MySqlCommand(consulta, conexion))
 										{
