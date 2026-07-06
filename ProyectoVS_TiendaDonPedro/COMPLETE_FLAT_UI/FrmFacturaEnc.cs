@@ -18,21 +18,12 @@ namespace COMPLETE_FLAT_UI
 				{
 						InitializeComponent();
 
-						#region btns
-
-						BtnGuardar.Enabled = false;
-						BtnCancelar.Enabled = false;
-						BtnSalir.Enabled = true;
-						BtnNuevo.Enabled = true;
-						BtnAddProd.Enabled = false;
-						BtnDelProd.Enabled = false;
-
-						#endregion btns
+						CambiarEstadoBtns(false, false);
 				}
 
 				private void BtnSalir_Click(object sender, EventArgs e)
 				{
-						// Preguntar si desea dalir de la aplicacion 
+						// Preguntar si desea dalir de la aplicacion
 						DialogResult result = MessageBox.Show(
 								"¿Desea Salir De La Aplicación?",
 								"Confirmación",
@@ -51,14 +42,68 @@ namespace COMPLETE_FLAT_UI
 
 				private void TxtIdent_Validated(object sender, EventArgs e)
 				{
+						long id = Convert.ToInt64(TxtIdent.Text);
+						CLIENTE = Func_Clientes.GetClientes(id).FirstOrDefault();
+						//CLIENETE == NULL ERROR
+						if (CLIENTE == null)
+						{
+								MessageBox.Show("Cliente no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								CambiarEstadoBtns(false, false);
+								return;
+						}
+						TxtNombreCliente.Text = CLIENTE.nombre_cliente;
 				}
 
 				private void BtnGuardar_Click(object sender, EventArgs e)
 				{
-				}
+						//Creamos factura
+						double total = 0;
+						if (!double.TryParse(TxtTotal.Text, out total))
+						{
+								MessageBox.Show("Error al guardar la factura.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+								return;
+						} 
+						Factura factura = new Factura
+						(
+								 0,
+								 DateTime.Now,
+								 CLIENTE.id_cliente,
+								 total,
+								"Pendiente"
+						);
+						// Watashi wa neko dayo o((>ω< ))o
+						//se pregunta si continuar
+						var continuar = MessageBox.Show("Desea Continuar Con El Pago ?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+						if (DialogResult.No == continuar)
+						{
+								return;
+						}
+						//se llama fun.Pagar y insert in Dian ( a futuro)
 
-				private void textBox1_TextChanged(object sender, EventArgs e)
-				{
+						//se inserta en la bd 
+						//if (!FuncFactura.newFactura(factura))
+						//		MessageBox.Show("Error al guardar la factura.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						//		return;
+						
+
+						factura.id_factura = FuncFactura.GetMAxId();
+						foreach (var item in carritoCompra)
+						{
+								item.id_factura = factura.id_factura;
+								if (!FuncFactura.newDetalleFactura(item))
+								{
+										
+										MessageBox.Show($"No se pudo Guardar {item.nombre_producto}"
+										 ,"Error",
+										 MessageBoxButtons.OK,
+										 MessageBoxIcon.Error
+										);
+										return;
+								}
+						}
+
+						CambiarEstadoBtns(false);
+
 				}
 
 				private void BtnAddProd_Click(object sender, EventArgs e)
@@ -82,7 +127,7 @@ namespace COMPLETE_FLAT_UI
 						var producto = productos.FirstOrDefault(item => item.nombre_producto == productoSeleccionado);
 						carritoCompra.Add(new DetalleFactura(
 								id_detalle: 0,
-								id_factura: funcionesFactura.GetMAxId(),
+								id_factura: FuncFactura.GetMAxId(),
 								id_producto: producto.id_producto,
 								nombre_producto: producto.nombre_producto,
 								cantidad: cantidad,
@@ -107,42 +152,13 @@ namespace COMPLETE_FLAT_UI
 								return;
 						}
 
-						#region btns
-
-						TxtIdent.Enabled = false;
-						TxtNombreCliente.Enabled = false;
-						BtnSalir.Enabled = false;
-						//habilitamos los btns
-						BtnGuardar.Enabled = true;
-						BtnCancelar.Enabled = true;
-						BtnAddProd.Enabled = true;
-						BtnDelProd.Enabled = true;
-
-						#endregion btns
+						CambiarEstadoBtns(true);
 
 						CbxProductos.Items.Clear();
 						foreach (var item in productos)
 						{
 								CbxProductos.Items.Add(item.nombre_producto);
 						}
-						long id = Convert.ToInt64(TxtIdent.Text);
-						CLIENTE = Func_Clientes.GetClientes(id).FirstOrDefault();
-						//CLIENETE == NULL ERROR
-						if (CLIENTE == null)
-						{
-								MessageBox.Show("Cliente no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-								//desabihilitamos  los btns
-								BtnGuardar.Enabled = false;
-								BtnCancelar.Enabled = false;
-								BtnAddProd.Enabled = false;
-								BtnDelProd.Enabled = false;
-								//habilitamos
-								TxtIdent.Enabled = true;
-								TxtNombreCliente.Enabled = true;
-								BtnSalir.Enabled = true;
-								return;
-						}
-						TxtNombreCliente.Text = CLIENTE.nombre_cliente;
 				}
 
 				private void TxtCantidad_Enter(object sender, EventArgs e)
@@ -168,6 +184,32 @@ namespace COMPLETE_FLAT_UI
 						return;
 				}
 
+				private void BtnCancelar_Click(object sender, EventArgs e)
+				{
+						CambiarEstadoBtns(false);
+				}
+
+				private void BtnDelProd_Click(object sender, EventArgs e)
+				{
+						// Obtenemos la fila actualmente seleccionada en el DataGridView y la convertimos a DetalleFactura.
+						// DGVDetalle.CurrentRow  → la fila que el usuario tiene seleccionada en este momento.
+						// ?.DataBoundItem        → el operador '?.' evita un NullReferenceException:
+						//                          si CurrentRow es null (ninguna fila seleccionada),
+						//                          la expresión completa devuelve null sin lanzar error.
+						//                          DataBoundItem es el objeto original de la lista (carritoCompra)
+						//                          que está vinculado a esa fila.
+						// as DetalleFactura      → intenta convertir el objeto a DetalleFactura.
+						//                          Si la conversión falla (tipo incorrecto), devuelve null en lugar de lanzar excepción.
+						var detalleSeleccionado = DGVDetalle.CurrentRow?.DataBoundItem as DetalleFactura;
+						var rpt = MessageBox.Show($"Desea Elminar {detalleSeleccionado.nombre_producto} de la factura ", "Confirmacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+						if (DialogResult.Yes == rpt)
+						{
+								carritoCompra.Remove(detalleSeleccionado);
+								renderDgvDatalle();
+								carcularTotales();
+						}
+				}
+
 				private void renderDgvDatalle()
 				{
 						// Usamos BindingList para que el DataGridView genere las columnas correctamente
@@ -191,52 +233,40 @@ namespace COMPLETE_FLAT_UI
 						if (DGVDetalle.Columns["valorIva"] != null)
 								DGVDetalle.Columns["valorIva"].HeaderText = "IVA %";
 				}
-
-				private void BtnCancelar_Click(object sender, EventArgs e)
+				private void CambiarEstadoBtns(bool activo, bool limpiar = true)
 				{
-						// 1. Resetear variables globales
-						carritoCompra.Clear();
-						CLIENTE = null;
+						//true edita false crear 
+						// Habilitar/Deshabilitar según el estado activo
+						TxtIdent.Enabled = !activo;
+						TxtNombreCliente.Enabled = !activo;
+						BtnSalir.Enabled = !activo;
+						BtnNuevo.Enabled = !activo;
 
-						// 2. Limpiar campos de texto
-						TxtIdent.Text = "";
-						TxtNombreCliente.Text = "";
-						TxtCantidad.Text = "";
-						TxtPrecioProducto.Text = "";
-						TxtSubTotal.Text = "";
-						TxtIVA.Text = "";
-						TxtTotal.Text = "";
+						BtnGuardar.Enabled = activo;
+						BtnCancelar.Enabled = activo;
+						BtnAddProd.Enabled = activo;
+						BtnDelProd.Enabled = activo;
 
-						// 3. Limpiar ComboBox y DataGridView
-						CbxProductos.Items.Clear();
-						CbxProductos.SelectedIndex = -1;
-						DGVDetalle.DataSource = null;
+						// Limpiar datos si no está activo y se solicita limpiar
+						if (!activo && limpiar)
+						{
+								if (carritoCompra != null) carritoCompra.Clear();
+								else carritoCompra = new List<DetalleFactura>();
+								
+								CLIENTE = null;
 
-						// 4. Restaurar estado de botones/textos al estado inicial (igual que el constructor)
-						TxtIdent.Enabled = true;
-						TxtNombreCliente.Enabled = true;
-						BtnGuardar.Enabled = false;
-						BtnCancelar.Enabled = false;
-						BtnSalir.Enabled = true;
-						BtnNuevo.Enabled = true;
-						BtnAddProd.Enabled = false;
-						BtnDelProd.Enabled = false;
-				}
+								TxtIdent.Text = "";
+								TxtNombreCliente.Text = "";
+								TxtCantidad.Text = "";
+								TxtPrecioProducto.Text = "";
+								TxtSubTotal.Text = "";
+								TxtIVA.Text = "";
+								TxtTotal.Text = "";
 
-				private void BtnDelProd_Click(object sender, EventArgs e)
-				{
-						// Obtenemos la fila actualmente seleccionada en el DataGridView y la convertimos a DetalleFactura.
-						// DGVDetalle.CurrentRow  → la fila que el usuario tiene seleccionada en este momento.
-						// ?.DataBoundItem        → el operador '?.' evita un NullReferenceException:
-						//                          si CurrentRow es null (ninguna fila seleccionada), 
-						//                          la expresión completa devuelve null sin lanzar error.
-						//                          DataBoundItem es el objeto original de la lista (carritoCompra)
-						//                          que está vinculado a esa fila.
-						// as DetalleFactura      → intenta convertir el objeto a DetalleFactura.
-						//                          Si la conversión falla (tipo incorrecto), devuelve null en lugar de lanzar excepción.
-						var detalleSeleccionado = DGVDetalle.CurrentRow?.DataBoundItem as DetalleFactura;
-
-
+								CbxProductos.Items.Clear();
+								CbxProductos.SelectedIndex = -1;
+								DGVDetalle.DataSource = null;
+						}
 				}
 		}
 }

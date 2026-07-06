@@ -135,6 +135,7 @@
 						this.TxtSubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.TxtSubTotal.Location = new System.Drawing.Point(554, 294);
 						this.TxtSubTotal.Name = "TxtSubTotal";
+						this.TxtSubTotal.ReadOnly = true;
 						this.TxtSubTotal.Size = new System.Drawing.Size(125, 23);
 						this.TxtSubTotal.TabIndex = 43;
 						// 
@@ -248,6 +249,7 @@
 						this.TxtIVA.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.TxtIVA.Location = new System.Drawing.Point(554, 322);
 						this.TxtIVA.Name = "TxtIVA";
+						this.TxtIVA.ReadOnly = true;
 						this.TxtIVA.Size = new System.Drawing.Size(125, 23);
 						this.TxtIVA.TabIndex = 49;
 						// 
@@ -269,6 +271,7 @@
 						this.TxtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 						this.TxtTotal.Location = new System.Drawing.Point(554, 349);
 						this.TxtTotal.Name = "TxtTotal";
+						this.TxtTotal.ReadOnly = true;
 						this.TxtTotal.Size = new System.Drawing.Size(125, 23);
 						this.TxtTotal.TabIndex = 51;
 						// 
@@ -366,8 +369,10 @@
 						// 
 						// TxtPrecioProducto
 						// 
+						this.TxtPrecioProducto.Enabled = false;
 						this.TxtPrecioProducto.Location = new System.Drawing.Point(554, 264);
 						this.TxtPrecioProducto.Name = "TxtPrecioProducto";
+						this.TxtPrecioProducto.ReadOnly = true;
 						this.TxtPrecioProducto.Size = new System.Drawing.Size(125, 20);
 						this.TxtPrecioProducto.TabIndex = 60;
 						// 

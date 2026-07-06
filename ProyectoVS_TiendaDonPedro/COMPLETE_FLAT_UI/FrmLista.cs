@@ -1,20 +1,8 @@
 using COMPLETE_FLAT_UI.BackEnd;
 using COMPLETE_FLAT_UI.BackEnd.modelos;
-using Org.BouncyCastle.Asn1.Crmf;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Common;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ZstdSharp.Unsafe;
 
 namespace COMPLETE_FLAT_UI
 {
@@ -82,7 +70,6 @@ namespace COMPLETE_FLAT_UI
 												MessageBoxButtons.OK, MessageBoxIcon.Information);
 										return;
 								}
-
 								FrmClientes f = new FrmClientes();
 								f.TxtNombre.Text = clienteSeleccionado.nombre_cliente;
 								f.TxtDireccion.Text = clienteSeleccionado.direccion_cliente;

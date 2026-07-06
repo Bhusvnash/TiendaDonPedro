@@ -9,7 +9,7 @@ namespace COMPLETE_FLAT_UI
 		internal  class Factura
 		{
 				// id_factura | fecha_factura | id_cliente | total_factura | estado_factura
-			public	long id_factura { get; set; }
+			public	long id_factura { get;  set; }
 				public DateTime fecha_factura { get; set; }
 				public long id_cliente { get; set; }
 				public double total_factura { get; set; }

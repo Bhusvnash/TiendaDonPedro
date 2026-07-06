@@ -8,11 +8,40 @@ using System.Threading.Tasks;
 
 namespace COMPLETE_FLAT_UI
 {
-		internal class funcionesFactura
+		internal class FuncFactura
 		{
+
+				public static bool newDetalleFactura(DetalleFactura detalle)
+				{
+						try
+						{
+								using (var conexion = new MySqlConnection(FuncLogin.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = @"Insert Into tbl_detallefactura
+										 (id_factura, id_producto, nombre_producto, cantidad, precioUnit, valorIva)
+										 values  (@id_factura, @id_producto, @nombre_producto, @cantidad, @precioUnit, @valorIva)";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@id_factura", detalle.id_factura);
+												cmd.Parameters.AddWithValue("@id_producto", detalle.id_producto);
+												cmd.Parameters.AddWithValue("@nombre_producto", detalle.nombre_producto);
+												cmd.Parameters.AddWithValue("@cantidad", detalle.cantidad);
+												cmd.Parameters.AddWithValue("@precioUnit", detalle.precioUnit);
+												cmd.Parameters.AddWithValue("@valorIva", detalle.valorIva);
+												var a = cmd.ExecuteNonQuery();
+												return true;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
 				public static bool newFactura(Factura factura)
 				{
-						//conexion
+						
 
 						try
 						{
@@ -52,7 +81,7 @@ namespace COMPLETE_FLAT_UI
 												var result = cmd.ExecuteScalar();
 												if (result != DBNull.Value)
 												{
-														return Convert.ToInt64(result)+1;
+														return Convert.ToInt64(result);
 												}
 												else
 												{

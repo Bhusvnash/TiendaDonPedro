@@ -127,7 +127,7 @@
   <ItemGroup>
     <Compile Include="BackEnd\FuncCategorias.cs" />
     <Compile Include="BackEnd\FuncionesClientes.cs" />
-    <Compile Include="BackEnd\funcionesFactura.cs" />
+    <Compile Include="BackEnd\FuncFactura.cs" />
     <Compile Include="BackEnd\FuncionesProductos.cs" />
     <Compile Include="BackEnd\FuncionesUsuarios.cs" />
     <Compile Include="BackEnd\modelos\ObjetoCategoria.cs" />

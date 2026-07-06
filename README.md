@@ -1,6 +1,5 @@
 <div align="center">
 
-
 <img src="https://i.pinimg.com/736x/14/36/fb/1436fb169ec6d7919c42ed17f799b63a.jpg" alt="TiendaDonPedro Banner" width="100%">
 
 # TiendaDonPedro
@@ -9,11 +8,11 @@
 
 </div>
 
----****
+---
 
 ## Descripcion del Proyecto
 
-**TiendaDonPedro** es una aplicacion de escritorio desarrollada en **C# con Windows Forms** que ofrece una solucion integral para la gestion administrativa y comercial de una tienda o pequeno negocio.
+TiendaDonPedro es una aplicacion de escritorio desarrollada en C# con Windows Forms que ofrece una solucion integral para la gestion administrativa y comercial de una tienda o pequeno negocio.
 
 El sistema resuelve la problematica del control manual de inventario, clientes y ventas en comercios pequenos y medianos, centralizando en una sola interfaz la gestion de productos, categorias, clientes, usuarios y facturacion de ventas, todo respaldado por una base de datos MySQL/MariaDB y con generacion de reportes en Excel.
 
@@ -66,10 +65,10 @@ El sistema resuelve la problematica del control manual de inventario, clientes y
 
 Antes de comenzar, asegurate de tener instalado lo siguiente:
 
-- **Visual Studio 2019 o superior** (con el workload de Desarrollo de escritorio .NET).
-- **.NET Framework 4.8 Developer Pack**.
-- **MySQL Server / MariaDB** (se recomienda usar XAMPP o WAMP) corriendo en `localhost:3306`.
-- **Git** para clonar el repositorio.
+- Visual Studio 2019 o superior (con el workload de Desarrollo de escritorio .NET).
+- .NET Framework 4.8 Developer Pack.
+- MySQL Server / MariaDB (se recomienda usar XAMPP o WAMP) corriendo en localhost:3306.
+- Git para clonar el repositorio.
 
 ---
 
@@ -124,7 +123,7 @@ nuget restore ProyectoVS_TiendaDonPedro/TiendaDonPedro.sln
 
 ## Configuracion (Variables de Conexion)
 
-La aplicacion utiliza una cadena de conexion a la base de datos definida en el archivo `BackEnd/FuncionesLogin.cs`. Antes de ejecutar el proyecto, ajusta los siguientes valores segun tu entorno:
+La aplicacion utiliza una cadena de conexion a la base de datos definida en el archivo BackEnd/FuncionesLogin.cs. Antes de ejecutar el proyecto, ajusta los siguientes valores segun tu entorno:
 
 ```csharp
 public static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tienda_don_pedro;Uid=root;Pwd=;";
@@ -132,18 +131,18 @@ public static string cadenaConexion = "Server=127.0.0.1;Port=3306;Database=tiend
 
 | Variable   | Descripcion                            | Valor por defecto      |
 |------------|------------------------------------------|--------------------------|
-| `Server`   | Direccion del servidor MySQL              | `127.0.0.1`               |
-| `Port`     | Puerto del servidor MySQL                 | `3306`                    |
-| `Database` | Nombre de la base de datos                | `tienda_don_pedro`        |
-| `Uid`      | Usuario de la base de datos               | `root`                    |
-| `Pwd`      | Contrasena del usuario                    | *(vacio)*                 |
+| Server   | Direccion del servidor MySQL              | 127.0.0.1               |
+| Port     | Puerto del servidor MySQL                 | 3306                    |
+| Database | Nombre de la base de datos                | tienda_don_pedro        |
+| Uid      | Usuario de la base de datos               | root                    |
+| Pwd      | Contrasena del usuario                    | (vacio)                 |
 
 ---
 
 ## Ejecucion en Local
 
-1. Establece **`COMPLETE_FLAT_UI`** como proyecto de inicio (Startup Project) en Visual Studio.
-2. Presiona `F5` o el boton Iniciar para compilar y ejecutar la aplicacion.
+1. Establece COMPLETE_FLAT_UI como proyecto de inicio (Startup Project) en Visual Studio.
+2. Presiona F5 o el boton Iniciar para compilar y ejecutar la aplicacion.
 
 ```bash
 # Alternativamente, desde la terminal con MSBuild
@@ -156,7 +155,7 @@ msbuild ProyectoVS_TiendaDonPedro/TiendaDonPedro.sln /p:Configuration=Debug
 
 ### Inicio de sesion
 
-Al ejecutar la aplicacion, se mostrara el formulario de Login (`FrmLogin`), donde el usuario debe ingresar su alias registrado en la base de datos.
+Al ejecutar la aplicacion, se mostrara el formulario de Login (FrmLogin), donde el usuario debe ingresar su alias registrado en la base de datos.
 
 **Entrada:**
 
@@ -196,7 +195,7 @@ A continuacion se muestra un diagrama (ASCII) que representa el flujo general de
                           |      FrmMenuPrincipal       |
                           |       (Menu Principal)      |
                           +----+------+------+------+----+
-                               |      |      |      |
+                                |      |      |      |
               +----------------+      |      |      +----------------+
               |                       |      |                       |
               v                       v      v                       v
@@ -229,11 +228,11 @@ A continuacion se muestra un diagrama (ASCII) que representa el flujo general de
 
 ### Resumen del flujo
 
-1. El usuario inicia sesion en `FrmLogin`, validandose contra la tabla `tbl_usuario` en MySQL.
-2. Tras la autenticacion, se carga `FrmMenuPrincipal`, punto central de navegacion.
+1. El usuario inicia sesion en FrmLogin, validandose contra la tabla tbl_usuario en MySQL.
+2. Tras la autenticacion, se carga FrmMenuPrincipal, punto central de navegacion.
 3. Desde el menu principal se accede a los modulos de gestion: Categorias, Productos, Clientes y Usuarios, todos con operaciones CRUD sobre sus respectivas tablas.
-4. La informacion de productos y clientes alimenta el modulo de Facturacion (`FrmFacturaEnc`), donde se registran las ventas.
-5. Cada venta se almacena en `tbl_facturaventa` y `tbl_detallefactura`.
+4. La informacion de productos y clientes alimenta el modulo de Facturacion (FrmFacturaEnc), donde se registran las ventas.
+5. Cada venta se almacena en tbl_facturaventa y tbl_detallefactura.
 6. Finalmente, los datos pueden exportarse a reportes en formato Excel mediante EPPlus.
 
 ---
@@ -263,7 +262,7 @@ Por favor, asegurate de que tu codigo compile correctamente y siga el estilo del
 
 ## Licencia
 
-Este proyecto esta bajo la licencia MIT. Consulta el archivo `LICENSE` para mas detalles.
+Este proyecto esta bajo la licencia MIT. Consulta el archivo LICENSE para mas detalles.
 
 ```
 MIT License
@@ -294,3 +293,26 @@ Tienes preguntas o sugerencias? Abre un Issue en el repositorio.
 Hecho para la gestion de pequenos negocios.
 
 </div>
+
+---
+
+## Funciones pendientes por implementar segun botones de los formularios
+
+A continuacion se detallan las funcionalidades que estan declaradas en el diseno de la interfaz de usuario pero carecen de implementacion logica en el codigo fuente:
+
+### 1. Modulo de Listados Generales (FrmLista)
+* **Eliminar Producto:** En el metodo `BtnEliminar_Click`, la seccion correspondiente al caso `Lista de Productos` contiene un bloque de manejo de excepciones vacio (`try {} catch {}`) y no invoca la logica de eliminacion correspondiente (`FuncProductos.DeleteProducto()`) para borrar el registro de la base de datos.
+
+### 2. Menu Principal (FrmMenuPrincipal)
+* **Modulo de Reportes:** El metodo `BtnReportes_Click` unicamente despliega una ventana de mensaje de alerta con el texto "Se deben hacer estas consultas". Falta la implementacion de las siguientes consultas y su posterior generacion en Excel o integracion grafica:
+  * Reporte de ventas del mes.
+  * Reporte de ventas agrupadas por cajera.
+  * Reporte de ventas filtradas por rango de fechas.
+  * Generacion de graficas dinamicas de ventas.
+
+### 3. Modulo de Facturacion (FrmFacturaEnc)
+* **Integracion de Pagos y Validacion Fiscal:** En el metodo `BtnGuardar_Click`, tras el almacenamiento local de la factura, se encuentra pendiente de desarrollo la logica para:
+  * Invocar la funcion de proceso de pago.
+  * Transmitir la facturacion electronica a la DIAN (entidad fiscal).
+### 4. Boton Exportar a Excel (BtnExcel) en FrmLista
+* **Exportacion a Excel:** El boton `BtnExcel` (con texto "Mostrar Excel") definido en `FrmLista.designer.cs` no tiene asociado un controlador de evento de clic (`Click`) ni logica implementada en `FrmLista.cs`. Actualmente no realiza la exportacion de las grillas de datos a formato de hoja de calculo de Excel.
