@@ -1,0 +1,133 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
+using TiendaDonPedro.Models;
+
+namespace TiendaDonPedro.Controllers
+{
+		internal class ClientesController
+		{
+				public static List<Cliente> GetClientes(long idBusqueda = 0)
+				{
+						List<Cliente> clientes = new List<Cliente>();
+						try
+						{
+								using (MySqlConnection conexion = new MySqlConnection(LoginController.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = idBusqueda == 0
+												? "select * from  tbl_cliente limit 10"
+												: "select * from tbl_cliente where id_cliente = @id";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												if (idBusqueda != 0)
+												{
+														cmd.Parameters.AddWithValue("@id", idBusqueda);
+												}
+												var lector = cmd.ExecuteReader();
+
+												while (lector.Read())
+												{
+														clientes.Add(new Cliente(Convert.ToInt64(lector["id_cliente"]),
+																lector["nombre_cliente"].ToString(),
+																lector["direccion_cliente"].ToString(),
+																lector["email_cliente"].ToString()));
+												}
+												return clientes;
+										}
+								}
+						}
+						catch
+						{
+								return null;
+						}
+				}
+
+				public static bool NewCliente(Cliente cliente)
+				{
+						using (var conexion = new MySqlConnection(LoginController.cadenaConexion))
+						{
+								try
+								{
+										conexion.Open();
+
+										string consulta = @"
+										 INSERT INTO tbl_cliente
+										(nombre_cliente, direccion_cliente, email_cliente)
+										VALUES
+										(@NombreCliente, @DireccionCliente, @EmailCliente)";
+
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@NombreCliente", cliente.nombre_cliente);
+												cmd.Parameters.AddWithValue("@DireccionCliente", cliente.direccion_cliente);
+												cmd.Parameters.AddWithValue("@EmailCliente", cliente.email_cliente);
+												int response = cmd.ExecuteNonQuery();
+												return response > 0;
+										}
+								}
+								catch
+								{
+										return false;
+								}
+						}
+				}
+
+				public static bool UpdateCliente(Cliente user)
+				{
+						try
+						{
+								using (var conexion = new MySqlConnection(LoginController.cadenaConexion))
+								{
+										conexion.Open();
+										string consulta = @"UPDATE tbl_cliente
+                                SET nombre_cliente = @nombre,
+                                    direccion_cliente = @direccion,
+                                    email_cliente = @correo
+                                WHERE id_cliente = @id";
+										using (var cmd = new MySqlCommand(consulta, conexion))
+										{
+												cmd.Parameters.AddWithValue("@id", user.id_cliente);
+												cmd.Parameters.AddWithValue("@nombre", user.nombre_cliente);
+												cmd.Parameters.AddWithValue("@direccion", user.direccion_cliente);
+												cmd.Parameters.AddWithValue("@correo", user.email_cliente);
+
+												int rpt = cmd.ExecuteNonQuery();
+												return rpt > 0;
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
+
+				public static bool DeleteCliente(Cliente client)
+				{
+						try
+						{
+								using (MySqlConnection cnn = new MySqlConnection(LoginController.cadenaConexion))
+								{
+										cnn.Open();
+										string consulta = @"Delete from  tbl_cliente where id_cliente = @id ";
+										using (var sql = new MySqlCommand(consulta, cnn))
+										{
+												sql.Parameters.AddWithValue("@id", client.id_cliente);
+												return 0 < sql.ExecuteNonQuery();
+										}
+								}
+						}
+						catch
+						{
+								return false;
+						}
+				}
+		}
+}
